@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,6 +44,29 @@ class Utilisateur
      * @ORM\OneToOne(targetEntity="App\Entity\Repos")
      */
      private $repos;
+
+     /**
+      * @ORM\OneToMany(targetEntity="App\Entity\Astreinte", mappedBy="user")
+      */
+     private $astreintes;
+
+     /**
+      * @ORM\Column(type="string", length=255)
+      */
+     private $prenom;
+
+     /**
+      * @ORM\Column(type="string", length=255)
+      */
+     private $password;
+
+     public function __construct()
+     {
+         $this->astreintes = new ArrayCollection();
+     }
+
+
+
 
     public function getId(): ?int
     {
@@ -104,6 +129,61 @@ class Utilisateur
     public function setRepos(?Repos $repos): self
     {
         $this->repos = $repos;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Astreinte[]
+     */
+    public function getAstreintes(): Collection
+    {
+        return $this->astreintes;
+    }
+
+    public function addAstreinte(Astreinte $astreinte): self
+    {
+        if (!$this->astreintes->contains($astreinte)) {
+            $this->astreintes[] = $astreinte;
+            $astreinte->setUserr($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAstreinte(Astreinte $astreinte): self
+    {
+        if ($this->astreintes->contains($astreinte)) {
+            $this->astreintes->removeElement($astreinte);
+            // set the owning side to null (unless already changed)
+            if ($astreinte->getUserr() === $this) {
+                $astreinte->setUserr(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
 
         return $this;
     }
