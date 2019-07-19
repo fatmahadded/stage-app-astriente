@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-
-    "content-hash": "f27bd4ff04b1c24ba3b1dde49c16c243",
-
-  //  "content-hash": "04ecb876f8b6500ea82ac3bd964503df",
-
+    "content-hash": "ef2b666f4714024e03c3a1047cabccd3",
     "packages": [
         {
             "name": "api-platform/api-pack",
@@ -5246,9 +5242,10 @@
                 "events",
                 "zf2"
             ],
-<<<<<<< HEAD
-            "time": "2019-07-09T22:19:18+00:00"
-        },
+            "time": "2018-04-25T15:33:34+00:00"
+        }
+    ],
+    "packages-dev": [
         {
             "name": "symfony/process",
             "version": "v4.3.2",
@@ -5356,10 +5353,8 @@
             "description": "Symfony WebServerBundle",
             "homepage": "https://symfony.com",
             "time": "2019-04-29T09:33:16+00:00"
-            "time": "2018-04-25T15:33:34+00:00"
         }
     ],
-    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": [],
