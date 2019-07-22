@@ -26,12 +26,12 @@ class Semaine
     private $numSemaine;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
     private $debutSemaine;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
     private $finSemaine;
 
@@ -45,7 +45,7 @@ class Semaine
     public function __construct()
     {
         $this->astreintes = new ArrayCollection();
-        $this->jourFerie = new ArrayCollection();
+
     }
 
     public function getId(): ?int
