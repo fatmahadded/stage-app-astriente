@@ -40,10 +40,7 @@ class Semaine
      */
     private $astreintes;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\JourFerie", mappedBy="semaine")
-     */
-    private $jourFerie;
+
 
     public function __construct()
     {
@@ -123,34 +120,5 @@ class Semaine
         return $this;
     }
 
-    /**
-     * @return Collection|JourFerie[]
-     */
-    public function getJourFerie(): Collection
-    {
-        return $this->jourFerie;
-    }
 
-    public function addJourFerie(JourFerie $jourFerie): self
-    {
-        if (!$this->jourFerie->contains($jourFerie)) {
-            $this->jourFerie[] = $jourFerie;
-            $jourFerie->setSemaine($this);
-        }
-
-        return $this;
-    }
-
-    public function removeJourFerie(JourFerie $jourFerie): self
-    {
-        if ($this->jourFerie->contains($jourFerie)) {
-            $this->jourFerie->removeElement($jourFerie);
-            // set the owning side to null (unless already changed)
-            if ($jourFerie->getSemaine() === $this) {
-                $jourFerie->setSemaine(null);
-            }
-        }
-
-        return $this;
-    }
 }
