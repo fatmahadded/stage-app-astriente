@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource()
@@ -17,41 +18,49 @@ class Utilisateur
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"astreinte:read","astreinte:write"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=40)
+     * @Groups({"astreinte:read"})
      */
     private $roles;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"astreinte:read"})
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"astreinte:read"})
      */
     private $mail;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Vivier", inversedBy="utilisateurs")
+     * @Groups({"astreinte:read"})
      */
     private $vivier;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Repos")
+     * @Groups({"astreinte:read"})
      */
      private $repos;
 
      /**
       * @ORM\OneToMany(targetEntity="App\Entity\Astreinte", mappedBy="user")
+
       */
      private $astreintes;
 
      /**
       * @ORM\Column(type="string", length=255)
+      * @Groups({"astreinte:read"})
       */
      private $prenom;
 

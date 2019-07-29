@@ -4,10 +4,17 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\AstreinteRepository")
+ * @ApiResource(
+ *     normalizationContext={"groups"={"astreinte:read"}},
+ *     denormalizationContext={"groups"={"astreinte:write"}}
+ * )
+ * @UniqueEntity(fields={"semaine","vivier"})
+
  */
 class Astreinte
 {
@@ -15,22 +22,27 @@ class Astreinte
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"astreinte:read"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Utilisateur", inversedBy="astreintes")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"astreinte:read","astreinte:write"})
+     *
      */
     private $user;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Paye", cascade={"persist", "remove"})
+     * @Groups({"astreinte:read"})
      */
     private $paye;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Rapport", cascade={"persist", "remove"})
+     * @Groups({"astreinte:read"})
      *
      */
     private $rapport;
@@ -38,12 +50,15 @@ class Astreinte
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Semaine", inversedBy="astreintes")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"astreinte:read","astreinte:write"})
      */
     private $semaine;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Vivier")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"astreinte:read","astreinte:write"})
+
      */
     private $vivier;
 
