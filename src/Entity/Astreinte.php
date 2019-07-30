@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -61,6 +63,17 @@ class Astreinte
 
      */
     private $vivier;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Remplacement", mappedBy="astreinte")
+     * @Groups({"astreinte:read","astreinte:write"})
+     */
+    private $remplacements;
+
+    public function __construct()
+    {
+        $this->remplacements = new ArrayCollection();
+    }
 
 
 
@@ -125,6 +138,37 @@ class Astreinte
     public function setVivier(?Vivier $vivier): self
     {
         $this->vivier = $vivier;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Remplacement[]
+     */
+    public function getRemplacements(): Collection
+    {
+        return $this->remplacements;
+    }
+
+    public function addRemplacement(Remplacement $remplacement): self
+    {
+        if (!$this->remplacements->contains($remplacement)) {
+            $this->remplacements[] = $remplacement;
+            $remplacement->setAstreinte($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRemplacement(Remplacement $remplacement): self
+    {
+        if ($this->remplacements->contains($remplacement)) {
+            $this->remplacements->removeElement($remplacement);
+            // set the owning side to null (unless already changed)
+            if ($remplacement->getAstreinte() === $this) {
+                $remplacement->setAstreinte(null);
+            }
+        }
 
         return $this;
     }

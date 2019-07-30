@@ -30,7 +30,7 @@ class Utilisateur
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"astreinte:read"})
+     * @Groups({"astreinte:read","remplacement:read"})
      */
     private $nom;
 
@@ -60,7 +60,7 @@ class Utilisateur
 
      /**
       * @ORM\Column(type="string", length=255)
-      * @Groups({"astreinte:read"})
+      * @Groups({"astreinte:read", "remplacement:read"})
       */
      private $prenom;
 

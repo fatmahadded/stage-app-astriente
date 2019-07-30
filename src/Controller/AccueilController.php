@@ -83,10 +83,10 @@ class AccueilController extends AbstractController
      */
     public function sendConfirmationMail(\Swift_Mailer $mailer)
     {
-        $message = (new \Swift_Message('Hello Email'))
+        $message = (new \Swift_Message('Confirmation d\'astreinte'))
             ->setFrom('astreinteapp@gmail.com')
             ->setTo('astreinteapp@gmail.com')
-            ->setBody('Veuillez remplir le formulaire de rapport ci joint ','text/plain');
+            ->setBody('Vous êtes maintenant inscrit à l\'astreinte de la semaine ....','text/plain');
         $mailer->send($message);
         return new Response('mail sent!! ', Response::HTTP_OK);
     }
