@@ -25,14 +25,21 @@ security:
             guard:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
+        refresh:
+            pattern:  ^/refresh
+            stateless: true
+            anonymous: true
         main:
             anonymous: true
             json_login:
-                check_path: /authentication_token
+                check_path: /login
                 username_path: mail
                 password_path: password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
+            logout:
+                path: /logout
+                invalidate_session: true
     access_control:
         - { path: ^/api/utilisateurs, roles: ROLE_ADMIN, methods: [POST, PUT, GET, DELETE] }
         - { path: ^/api/viviers, roles: ROLE_USER, methods: [POST, PUT, GET, DELETE] }
@@ -47,7 +54,9 @@ security:
         - { path: ^/api/retours, roles: ROLE_USER, methods: [POST, PUT, GET, DELETE] }
         - { path: ^/api/semaines, roles: ROLE_USER, methods: [POST, PUT, GET, DELETE] }
         - { path: ^/api, roles: IS_AUTHENTICATED_ANONYMOUSLY  }
+        - { path: ^/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/accueil/semaines, roles: ROLE_USER, methods: [GET] }
+        - { path: ^/logout, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/accueil/astreinte, roles: ROLE_USER, methods: [GET] }
         - { path: ^/accueil/astreinte/xls, roles: ROLE_USER, methods: [GET] }
         - { path: ^/accueil/add/astreinte, roles: ROLE_USER, methods: [POST] }
