@@ -6,12 +6,16 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
  */
-class Utilisateur
+class Utilisateur implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -21,7 +25,7 @@ class Utilisateur
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=40)
+     * @ORM\Column(type="array")
      */
     private $roles;
 
@@ -41,44 +45,90 @@ class Utilisateur
     private $vivier;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Repos")
+     * @ORM\OneToOne(targetEntity="App\Entity\Repos",cascade={"persist","remove"})
      */
-     private $repos;
+    private $repos;
 
-     /**
-      * @ORM\OneToMany(targetEntity="App\Entity\Astreinte", mappedBy="user")
-      */
-     private $astreintes;
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Astreinte", mappedBy="user")
+     */
+    private $astreintes;
 
-     /**
-      * @ORM\Column(type="string", length=255)
-      */
-     private $prenom;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $prenom;
 
-     /**
-      * @ORM\Column(type="string", length=255)
-      */
-     private $password;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $password;
 
-     public function __construct()
-     {
-         $this->astreintes = new ArrayCollection();
-     }
+    public function __construct()
+    {
+        $this->astreintes = new ArrayCollection();
+    }
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $isActive;
+
+    /**
+     * @return mixed
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param mixed $isActive
+     */
+    public function setIsActive($isActive): void
+    {
+        $this->isActive = $isActive;
+    }
 
 
+//******************** Champs obligatoire de UserInterface*****************
 
+    public function eraseCredentials()
+    {
+
+    }
+
+    public function getUsername()
+    {
+        return $this->mail;
+    }
+
+    public function getSalt()
+    {
+        // you *may* need a real salt depending on your encoder
+        // see section on salt below
+        return null;
+    }
+
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+
+//***********************************************************************
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getRoles(): ?string
-    {
-        return $this->roles;
-    }
+//    public function getRoles(): ?string
+//    {
+//        return $this->roles;
+//    }
 
-    public function setRoles(string $roles): self
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
 

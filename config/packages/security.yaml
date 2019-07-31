@@ -1,22 +1,54 @@
 security:
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    encoders:
+        App\Entity\Utilisateur:
+            algorithm: bcrypt
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_ADMIN_NAT: ROLE_ADMIN
     providers:
-        in_memory: { memory: ~ }
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\Utilisateur
+                property: mail
+
     firewalls:
         dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            pattern: ^/_(profiler|wdt)
             security: false
+        api:
+            pattern: ^/api/
+            stateless: true
+            anonymous: true
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
         main:
             anonymous: true
-
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#firewalls-authentication
-
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
-
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
+            json_login:
+                check_path: /authentication_token
+                username_path: mail
+                password_path: password
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/api/utilisateurs, roles: ROLE_ADMIN, methods: [POST, PUT, GET, DELETE] }
+        - { path: ^/api/viviers, roles: ROLE_USER, methods: [POST, PUT, GET, DELETE] }
+        - { path: ^/api/semaines, roles: ROLE_USER, methods: [GET] }
+        - { path: ^/api/jour_feries, roles: ROLE_USER, methods: [GET] }
+        - { path: ^/api/astreintes, roles: ROLE_USER, methods: [POST, PUT, GET, DELETE] }
+        - { path: ^/api/entites, roles: ROLE_USER, methods: [POST, PUT, GET, DELETE] }
+        - { path: ^/api/interventions, roles: ROLE_USER, methods: [POST, PUT, GET, DELETE] }
+        - { path: ^/api/payes, roles: ROLE_USER, methods: [POST, PUT, GET, DELETE] }
+        - { path: ^/api/rapports, roles: ROLE_USER, methods: [POST, PUT, GET, DELETE] }
+        - { path: ^/api/repos, roles: ROLE_USER, methods: [POST, PUT, GET, DELETE] }
+        - { path: ^/api/retours, roles: ROLE_USER, methods: [POST, PUT, GET, DELETE] }
+        - { path: ^/api/semaines, roles: ROLE_USER, methods: [POST, PUT, GET, DELETE] }
+        - { path: ^/api, roles: IS_AUTHENTICATED_ANONYMOUSLY  }
+        - { path: ^/accueil/semaines, roles: ROLE_USER, methods: [GET] }
+        - { path: ^/accueil/astreinte, roles: ROLE_USER, methods: [GET] }
+        - { path: ^/accueil/astreinte/xls, roles: ROLE_USER, methods: [GET] }
+        - { path: ^/accueil/add/astreinte, roles: ROLE_USER, methods: [POST] }
+        - { path: ^/addUser, roles: ROLE_ADMIN, methods: [POST] }
