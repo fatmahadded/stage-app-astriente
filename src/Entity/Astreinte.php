@@ -3,11 +3,20 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\AstreinteRepository")
+ * @ApiResource(
+ *     normalizationContext={"groups"={"astreinte:read"}},
+ *     denormalizationContext={"groups"={"astreinte:write"}}
+ * )
+ * @UniqueEntity(fields={"semaine","vivier"})
+
  */
 class Astreinte
 {
@@ -15,22 +24,27 @@ class Astreinte
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"astreinte:read"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Utilisateur", inversedBy="astreintes")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"astreinte:read","astreinte:write"})
+     *
      */
     private $user;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Paye", cascade={"persist", "remove"})
+     * @Groups({"astreinte:read"})
      */
     private $paye;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Rapport", cascade={"persist", "remove"})
+     * @Groups({"astreinte:read"})
      *
      */
     private $rapport;
@@ -38,14 +52,28 @@ class Astreinte
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Semaine", inversedBy="astreintes")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"astreinte:read","astreinte:write"})
      */
     private $semaine;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Vivier")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"astreinte:read","astreinte:write"})
+
      */
     private $vivier;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Remplacement", mappedBy="astreinte",cascade={"remove"})
+     * @Groups({"astreinte:read","astreinte:write"})
+     */
+    private $remplacements;
+
+    public function __construct()
+    {
+        $this->remplacements = new ArrayCollection();
+    }
 
 
 
@@ -110,6 +138,37 @@ class Astreinte
     public function setVivier(?Vivier $vivier): self
     {
         $this->vivier = $vivier;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Remplacement[]
+     */
+    public function getRemplacements(): Collection
+    {
+        return $this->remplacements;
+    }
+
+    public function addRemplacement(Remplacement $remplacement): self
+    {
+        if (!$this->remplacements->contains($remplacement)) {
+            $this->remplacements[] = $remplacement;
+            $remplacement->setAstreinte($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRemplacement(Remplacement $remplacement): self
+    {
+        if ($this->remplacements->contains($remplacement)) {
+            $this->remplacements->removeElement($remplacement);
+            // set the owning side to null (unless already changed)
+            if ($remplacement->getAstreinte() === $this) {
+                $remplacement->setAstreinte(null);
+            }
+        }
 
         return $this;
     }

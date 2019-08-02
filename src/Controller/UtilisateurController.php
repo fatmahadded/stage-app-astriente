@@ -35,5 +35,27 @@ class UtilisateurController extends AbstractController
         return $this->json($result);
     }
 
+    /**
+     * @Route("/user/mail/{mail}",methods={"GET","HEAD"})
+     */
+    public function getUserMail(UtilisateurService $service, $mail)
+    {
+
+        $result=$service->getUserMail($mail);
+        return $this->json($result);
+    }
+
+    /**
+     * @Route("/user/vivier/{vivier}",methods={"GET","HEAD"})
+     */
+    public function getUserVivier(UtilisateurService $service, $vivier)
+    {
+
+        $result=$service->getUserVivier($vivier);
+        return $this->json($result);
+    }
+
+
+
 
 }

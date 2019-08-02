@@ -29,6 +29,7 @@ class UtilisateurService
         $user->setNom($data["nom"]);
         $user->setPrenom($data["prenom"]);
         $user->setMail($data["mail"]);
+        $user->setVivier($data["vivier"]);
         $user->setPassword($this->passwordEncoder->encodePassword(
             $user,
             $data["password"]
@@ -43,6 +44,16 @@ class UtilisateurService
         $em->persist($user);
         $em->flush();
         return $user;
+    }
+
+    public function getUserMail($mail)
+    {
+        return $this->repo->findOneBy(['mail' => $mail]);
+    }
+
+    public function getUserVivier($vivier)
+    {
+        return $this->repo->findBy(['vivier' => $vivier]);
     }
 
 }

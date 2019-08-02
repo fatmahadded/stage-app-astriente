@@ -2,13 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\Semaine;
+use App\Entity\Astreinte;
 use App\Repository\SemaineRepository;
 use App\Service\AccueilService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AccueilController extends AbstractController
@@ -24,6 +28,7 @@ class AccueilController extends AbstractController
     }
 
     //cette méthode retourne les semaines que l'utilisateur peut modifier
+
     /**
      * @Route("/accueil/semaines", name="accueil",methods={"GET","HEAD"})
      */
@@ -35,34 +40,49 @@ class AccueilController extends AbstractController
     }
 
     /**
-     * @Route("/accueil/astreinte", name="astreinte",methods={"GET","HEAD"})
+     * @Route("/accueil/astreinte/{idSemaine}/{idVivier}", name="astreinte",methods={"GET","HEAD"})
      */
-    public function getAstreinteSemaine(AccueilService $accueilService, SemaineRepository $repository,Request $request)
+    public function getAstreinteSemaine(AccueilService $accueilService,
+                                        $idSemaine, $idVivier, LoggerInterface $logger)
     {
-        //$idSemaine=$request->query->get('id');
-        $data = json_decode($request->getContent(),true);
-        $entityManager = $this->getDoctrine()->getManager();
-        return $this->json($accueilService->getAstreinteSemaine($entityManager,$data["idSemaine"],$data["idVivier"]));
+        $results = $accueilService->getAstreinteSemaine($idSemaine, $idVivier);
+        return $this->json($results);
     }
+
     /**
-     * @Route("/accueil/astreinte/xls", name="astreinte",methods={"GET","HEAD"})
+     * @Route("/accueil/astreinteXls/{dateDeb}/{dateFin}/{vivier}", name="astreinteXLS",methods={"GET","HEAD"})
      */
-    public function getXLS(AccueilService $accueilService,Request $request)
+    public function getXLS(AccueilService $accueilService, $dateDeb, $dateFin, $vivier, KernelInterface $appKernel)
     {
+        $deb = date_create($dateDeb);
+        $fin = date_create($dateFin);
         $entityManager = $this->getDoctrine()->getManager();
-        $data = json_decode($request->getContent(),true);
-               $accueilService->getXLS($entityManager,$data["dateDeb"],$data["dateFin"]);
+        $results = $accueilService->getXLS($entityManager, $deb, $fin, $vivier);
+        return $this->json($results);
     }
 
     /**
      * @Route("/accueil/add/astreinte",methods={"POST","HEAD"})
      */
-    public function addAstreinte(AccueilService $accueilService,Request $request)
+    public function addAstreinte(AccueilService $accueilService, Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $data = json_decode($request->getContent(),true);
-        $result=$accueilService->addAstreinte($entityManager,$data["idSemaine"],$data["idUser"],$data["idVivier"]);
+        $data = json_decode($request->getContent(), true);
+        $result = $accueilService->addAstreinte($entityManager, $data["idSemaine"], $data["idUser"], $data["idVivier"]);
+
         return $this->json($result);
+    }
+    /**
+     * @Route("/accueil/send/confirmation",methods={"GET","HEAD"})
+     */
+    public function sendConfirmationMail(\Swift_Mailer $mailer)
+    {
+        $message = (new \Swift_Message('Confirmation d\'astreinte'))
+            ->setFrom('astreinteapp@gmail.com')
+            ->setTo('astreinteapp@gmail.com')
+            ->setBody('Vous êtes maintenant inscrit à l\'astreinte de la semaine ....','text/plain');
+        $mailer->send($message);
+        return new Response('mail sent!! ', Response::HTTP_OK);
     }
 
 }

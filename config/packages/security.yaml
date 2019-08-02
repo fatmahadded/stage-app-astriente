@@ -13,12 +13,22 @@ security:
                 class: App\Entity\Utilisateur
                 property: mail
 
+
+
     firewalls:
         dev:
             pattern: ^/_(profiler|wdt)
             security: false
         api:
             pattern: ^/api/
+            stateless: true
+            anonymous: true
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+        accueil:
+            pattern : ^/accueil/
             stateless: true
             anonymous: true
             provider: app_user_provider
@@ -53,9 +63,10 @@ security:
         - { path: ^/api/repos, roles: ROLE_USER, methods: [POST, PUT, GET, DELETE] }
         - { path: ^/api/retours, roles: ROLE_USER, methods: [POST, PUT, GET, DELETE] }
         - { path: ^/api/semaines, roles: ROLE_USER, methods: [POST, PUT, GET, DELETE] }
+        - { path: ^/api/remplacements, roles: ROLE_USER, methods: [POST, PUT, GET, DELETE] }
         - { path: ^/api, roles: IS_AUTHENTICATED_ANONYMOUSLY  }
         - { path: ^/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/accueil/semaines, roles: ROLE_USER, methods: [GET] }
+        - { path: ^/accueil/semaines, roles: ROLE_USER }
         - { path: ^/logout, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/accueil/astreinte, roles: ROLE_USER, methods: [GET] }
         - { path: ^/accueil/astreinte/xls, roles: ROLE_USER, methods: [GET] }
