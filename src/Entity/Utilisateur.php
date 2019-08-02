@@ -14,7 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     normalizationContext={"groups"={"user:read"}})
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
  */
 class Utilisateur implements UserInterface
@@ -23,36 +24,36 @@ class Utilisateur implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"astreinte:read","astreinte:write"})
+     * @Groups({"astreinte:read","astreinte:write","user:read"})
      */
     private $id;
 
     /**
-     * @Groups({"astreinte:read"})
+     * @Groups({"astreinte:read","user:read"})
      * @ORM\Column(type="array")
      */
     private $roles;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"astreinte:read","remplacement:read"})
+     * @Groups({"astreinte:read","remplacement:read","user:read"})
      */
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"astreinte:read"})
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Groups({"astreinte:read","user:read"})
      */
     private $mail;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Vivier", inversedBy="utilisateurs")
-     * @Groups({"astreinte:read"})
+     * @Groups({"astreinte:read","user:read"})
      */
     private $vivier;
 
     /**
-     * @Groups({"astreinte:read"})
+     * @Groups({"astreinte:read","user:read"})
      * @ORM\OneToOne(targetEntity="App\Entity\Repos",cascade={"persist","remove"})
      */
     private $repos;
@@ -65,7 +66,7 @@ class Utilisateur implements UserInterface
 
      /**
       * @ORM\Column(type="string", length=255)
-      * @Groups({"astreinte:read", "remplacement:read"})
+      * @Groups({"astreinte:read", "remplacement:read","user:read"})
       */
      private $prenom;
 

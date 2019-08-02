@@ -65,7 +65,7 @@ class Astreinte
     private $vivier;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Remplacement", mappedBy="astreinte")
+     * @ORM\OneToMany(targetEntity="App\Entity\Remplacement", mappedBy="astreinte",cascade={"remove"})
      * @Groups({"astreinte:read","astreinte:write"})
      */
     private $remplacements;

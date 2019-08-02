@@ -5,21 +5,15 @@ namespace App\Controller;
 use App\Entity\Astreinte;
 use App\Repository\SemaineRepository;
 use App\Service\AccueilService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
-use function MongoDB\BSON\toJSON;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\IOFactory;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Date;
 
 class AccueilController extends AbstractController
 {

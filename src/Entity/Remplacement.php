@@ -11,7 +11,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Entity(repositoryClass="App\Repository\RemplacementRepository")
  * @ApiResource(
  *     normalizationContext={"groups"={"remplacement:read"}},
- *     denormalizationContext={"groups"={"remplacement:write"}}
+ *
  * )
  */
 class Remplacement
