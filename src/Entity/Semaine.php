@@ -41,10 +41,11 @@ class Semaine
     private $astreintes;
 
 
+
     public function __construct()
     {
         $this->astreintes = new ArrayCollection();
-        $this->jourFerie = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -118,4 +119,6 @@ class Semaine
 
         return $this;
     }
+
+
 }

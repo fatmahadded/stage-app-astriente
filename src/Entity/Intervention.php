@@ -29,12 +29,12 @@ class Intervention
     private $date;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="string")
      */
     private $heureDebut;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="string")
      */
     private $heureFin;
 
@@ -73,24 +73,24 @@ class Intervention
         return $this;
     }
 
-    public function getHeureDebut(): ?\DateTimeInterface
+    public function getHeureDebut(): ? string
     {
         return $this->heureDebut;
     }
 
-    public function setHeureDebut(\DateTimeInterface $heureDebut): self
+    public function setHeureDebut(string $heureDebut): self
     {
         $this->heureDebut = $heureDebut;
 
         return $this;
     }
 
-    public function getHeureFin(): ?\DateTimeInterface
+    public function getHeureFin(): ? string
     {
         return $this->heureFin;
     }
 
-    public function setHeureFin(\DateTimeInterface $heureFin): self
+    public function setHeureFin(string $heureFin): self
     {
         $this->heureFin = $heureFin;
 

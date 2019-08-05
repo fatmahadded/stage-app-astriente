@@ -31,7 +31,7 @@ class Astreinte
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Rapport", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     *
      */
     private $rapport;
 
@@ -40,6 +40,12 @@ class Astreinte
      * @ORM\JoinColumn(nullable=false)
      */
     private $semaine;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Vivier")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $vivier;
 
 
 
@@ -92,6 +98,18 @@ class Astreinte
     public function setSemaine(?Semaine $semaine): self
     {
         $this->semaine = $semaine;
+
+        return $this;
+    }
+
+    public function getVivier(): ?Vivier
+    {
+        return $this->vivier;
+    }
+
+    public function setVivier(?Vivier $vivier): self
+    {
+        $this->vivier = $vivier;
 
         return $this;
     }
