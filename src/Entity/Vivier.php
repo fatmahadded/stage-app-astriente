@@ -18,7 +18,7 @@ class Vivier
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"astreinte:read"})
+     * @Groups({"astreinte:read","user:read"})
      */
     private $id;
 

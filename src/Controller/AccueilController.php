@@ -40,12 +40,21 @@ class AccueilController extends AbstractController
     }
 
     /**
-     * @Route("/accueil/astreinte/{idSemaine}/{idVivier}", name="astreinte",methods={"GET","HEAD"})
+     * @Route("/accueil/astreinte/{idSemaine}/{idVivier}", methods={"GET","HEAD"})
      */
     public function getAstreinteSemaine(AccueilService $accueilService,
-                                        $idSemaine, $idVivier, LoggerInterface $logger)
+                                        $idSemaine, $idVivier)
     {
         $results = $accueilService->getAstreinteSemaine($idSemaine, $idVivier);
+        return $this->json($results);
+    }
+    /**
+     * @Route("/accueil/all/astreinte/{idSemaine}", methods={"GET","HEAD"})
+     */
+    public function getAllAstreinteSemaine(AccueilService $accueilService,
+                                        $idSemaine)
+    {
+        $results = $accueilService->getAllAstreinteSemaine($idSemaine);
         return $this->json($results);
     }
 
