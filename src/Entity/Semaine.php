@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ApiResource()
@@ -17,21 +18,26 @@ class Semaine
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Serializer\Groups({"astreinte"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="integer")
+     * @Serializer\Groups({"astreinte"})
+
      */
     private $numSemaine;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
+     * @Serializer\Groups({"astreinte"})
      */
     private $debutSemaine;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
+     * @Serializer\Groups({"astreinte"})
      */
     private $finSemaine;
 

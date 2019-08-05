@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ApiResource()
@@ -17,21 +18,25 @@ class Utilisateur
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Serializer\Groups({"astreinte","user"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=40)
+     * @Serializer\Groups({"astreinte","user"})
      */
     private $roles;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Serializer\Groups({"astreinte"})
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Serializer\Groups({"astreinte"})
      */
     private $mail;
 
@@ -42,21 +47,47 @@ class Utilisateur
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Repos")
+     * @Serializer\Groups({"astreinte"})
      */
      private $repos;
 
      /**
       * @ORM\OneToMany(targetEntity="App\Entity\Astreinte", mappedBy="user")
+      * @Serializer\Groups({"user"})
       */
      private $astreintes;
 
      /**
       * @ORM\Column(type="string", length=255)
+      * @Serializer\Groups({"astreinte"})
       */
      private $prenom;
 
+    /**
+     * @return mixed
+     */
+    public function getSolde()
+    {
+        return $this->solde;
+    }
+
+    /**
+     * @param mixed $solde
+     */
+    public function setSolde($solde): void
+    {
+        $this->solde = $solde;
+    }
+
+    /**
+     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="float")
+     */
+    private $solde;
+
      /**
       * @ORM\Column(type="string", length=255)
+      * @Serializer\Groups({"astreinte"})
       */
      private $password;
 
@@ -184,7 +215,6 @@ class Utilisateur
     public function setPassword(string $password): self
     {
         $this->password = $password;
-
         return $this;
     }
 }

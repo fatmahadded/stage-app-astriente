@@ -37,6 +37,31 @@ class Intervention
      * @ORM\Column(type="time")
      */
     private $heureFin;
+    /**
+     * @ORM\Column(type="float")
+     */
+
+    private $salaire;
+
+    /**
+     * @return mixed
+     */
+    public function getSalaire()
+    {
+        return $this->salaire;
+    }
+
+    /**
+     * @param mixed $salaire
+     */
+    public function setSalaire($salaire): void
+    {
+        $this->salaire = $salaire;
+    }
+
+
+
+
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Rapport", inversedBy="interventions")

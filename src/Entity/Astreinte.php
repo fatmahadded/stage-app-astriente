@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ApiResource()
@@ -15,32 +16,74 @@ class Astreinte
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Serializer\Groups({"astreinte"})
      */
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Utilisateur", inversedBy="astreintes")
+     * @ORM\ManyToOne(targetEntity="Utilisateur", inversedBy="astreintes")
      * @ORM\JoinColumn(nullable=false)
+     * @Serializer\Groups({"astreinte"})
      */
     private $user;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Paye", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Paye", cascade={"persist", "remove"})
      */
     private $paye;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Rapport", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToOne(targetEntity="Rapport", cascade={"persist", "remove"})
+     *  @Serializer\Groups({"astreinte"})
      */
     private $rapport;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Semaine", inversedBy="astreintes")
+     * @ORM\ManyToOne(targetEntity="Semaine", inversedBy="astreintes")
      * @ORM\JoinColumn(nullable=false)
+     * @Serializer\Groups({"astreinte"})
      */
     private $semaine;
 
+    /**
+     * @ORM\Column(type="float")
+     * @Serializer\Groups({"astreinte"})
+     */
+    private $salaire;
+
+    /**
+     * @return mixed
+     */
+    public function getSalaire()
+    {
+        return $this->salaire;
+    }
+
+    /**
+     * @param mixed $salaire
+     *
+     */
+    public function setSalaire($salaire): void
+    {
+        $this->salaire = $salaire;
+    }
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Vivier")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $vivier;
+
+    /**
+     * @ORM\Column(type="float")
+     * @Serializer\Groups({"astreinte"})
+     */
+    private $repos;
+
+    /**
+     * @return mixed
+     */
 
 
     public function getId(): ?int
@@ -63,6 +106,22 @@ class Astreinte
     public function getPaye(): ?Paye
     {
         return $this->paye;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRepos()
+    {
+        return $this->repos;
+    }
+
+    /**
+     * @param mixed $repos
+     */
+    public function setRepos($repos): void
+    {
+        $this->repos = $repos;
     }
 
     public function setPaye(?Paye $paye): self
@@ -95,6 +154,19 @@ class Astreinte
 
         return $this;
     }
+
+    public function getVivier(): ?Vivier
+    {
+        return $this->vivier;
+    }
+
+    public function setVivier(?Vivier $vivier): self
+    {
+        $this->vivier = $vivier;
+
+        return $this;
+    }
+
 
 
 }

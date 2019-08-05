@@ -1,20 +1,25 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello HistoriqueController!{% endblock %}
-
+{%  extends 'base.html.twig' %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <article>
+        <table style="width:100%">
+            <thead>
+            <tr>
+                <th>id</th>
+{#                <th>prenom</th>#}
+{#                <th>age</th>#}
+{#                <th>Groupe_id</th>#}
+{#                <th> NomGroupe</th>#}
+{#                <th>text</th>#}
+            </tr>
+            </thead>
+            {% for astreinte in astreintes %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+                <tr>
+                    <td>{{ astreinte.semaine.debutSemaine | date('d/m/Y')}}</td>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/App/stage-app-astriente/src/Controller/HistoriqueController.php'|file_link(0) }}">src/Controller/HistoriqueController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/App/stage-app-astriente/templates/historique/index.html.twig'|file_link(0) }}">templates/historique/index.html.twig</a></code></li>
-    </ul>
-</div>
-{% endblock %}
+                </tr>
+
+            {% endfor %}
+        </table>
+    </article>
+{%  endblock %}
