@@ -71,4 +71,4 @@ security:
         - { path: ^/accueil/astreinte, roles: ROLE_USER, methods: [GET] }
         - { path: ^/accueil/astreinte/xls, roles: ROLE_USER, methods: [GET] }
         - { path: ^/accueil/add/astreinte, roles: ROLE_USER, methods: [POST] }
-        - { path: ^/addUser, roles: ROLE_ADMIN, methods: [POST] }
+#        - { path: ^/addUser, roles: ROLE_ADMIN, methods: [POST] }
