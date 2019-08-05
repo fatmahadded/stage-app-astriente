@@ -15,53 +15,61 @@ use Symfony\Component\Validator\Constraints\Date;
 
 class AccueilService
 {
-    public function __construct(AstreinteRepository $astreinteRepository,VivierRepository $vivierRepository,
-                                UtilisateurRepository $userRepository,SemaineRepository $semaineRepository)
+    public function __construct(AstreinteRepository $astreinteRepository, VivierRepository $vivierRepository,
+                                UtilisateurRepository $userRepository, SemaineRepository $semaineRepository,
+                                \Swift_Mailer $mailer)
     {
-        $this->astreinteRepository=$astreinteRepository;
-        $this->semaineRepository=$semaineRepository;
-        $this->userRepository=$userRepository;
-        $this->vivierRepository=$vivierRepository;
+        $this->astreinteRepository = $astreinteRepository;
+        $this->semaineRepository = $semaineRepository;
+        $this->userRepository = $userRepository;
+        $this->vivierRepository = $vivierRepository;
+        $this->mailer = $mailer;
     }
 
     private $astreinteRepository;
     private $semaineRepository;
     private $vivierRepository;
     private $userRepository;
+    private $mailer;
 
 
     public function getSemainesAstreintes(EntityManager $em)
     {
 
-        $date=date_create("2019-01-20");
-        date_sub($date,date_interval_create_from_date_string("7 days"));
-        $date=date_format($date,"Y-m-d");
+        $date = date_create();
+        date_sub($date, date_interval_create_from_date_string("7 days"));
+        $date = date_format($date, "Y-m-d");
         $qb = $em->createQueryBuilder();
         $qb->select('s')
             ->from('App\Entity\Semaine', 's')
             ->where('s.finSemaine > ?1')
-            ->setParameter(1, $date)
-        ;
+            ->setParameter(1, $date);
         $query = $qb->getQuery();
         $result = $query->getResult();
         return $result;
     }
 
-    public function getAstreinteSemaine(EntityManager $em,$idSemaine,$idVivier)
+    public function getAstreinteSemaine($idSemaine, $idVivier)
     {
-        $qb = $em->createQueryBuilder();
-        $qb->select('a')
-            ->from('App\Entity\Astreinte', 'a')
-            ->where('a.semaine = ?1')
-            ->andWhere('a.vivier= ?2')
-            ->setParameters(array(1 => $idSemaine, 2 => $idVivier));
-        $query = $qb->getQuery();
-        $result = $query->getResult();
+        $result = $this->astreinteRepository->findBy(
+            ['semaine' => $idSemaine,
+                'vivier' => $idVivier]
+        );
         return $result;
     }
-    public function addAstreinte(EntityManager $em,$idSemaine,$idUser,$idVivier)
+
+    public function getAllAstreinteSemaine($idSemaine)
     {
-        $astreinte=new Astreinte();
+        $result = $this->astreinteRepository->findBy(
+            ['semaine' => $idSemaine]
+        );
+        return $result;
+
+    }
+
+    public function addAstreinte(EntityManager $em, $idSemaine, $idUser, $idVivier)
+    {
+        $astreinte = new Astreinte();
         $astreinte->setSemaine($this->semaineRepository->find($idSemaine));
         $astreinte->setUser($this->userRepository->find($idUser));
         $astreinte->setVivier($this->vivierRepository->find($idVivier));
@@ -69,19 +77,24 @@ class AccueilService
         $em->flush();
         return $astreinte;
     }
-    public function getXLS(EntityManager $em,$dateDeb,$dateFin)
+
+    public function getXLS(EntityManager $em, $dateDeb, $dateFin, $idVivier)
     {
-        /*$nbDeb=$this->getSemaineNumber($dateDeb);
-        $nbFin=$this->getSemaineNumber($dateFin);
+
 
         $qb = $em->createQueryBuilder();
         $qb->select('a')
             ->from('App\Entity\Astreinte', 'a')
-            ->where('a.semaine = ?1')
-            ->andWhere('a.vivier= ?2')
-            ->setParameters(array(1 => $idSemaine, 2 => $idVivier));
+            ->leftJoin('a.semaine', 's')
+            ->where('s.debutSemaine >= ?1 AND s.finSemaine <= ?2')
+            //->where('s.debutSemaine = 2019-01-18')
+            ->andWhere('a.vivier= ?3')
+            ->setParameters(array(1 => $dateDeb, 2 => $dateFin, 3 => $idVivier));
+        //->setParameters(array( 3 => $idVivier));
         $query = $qb->getQuery();
-        $result = $query->getResult();*/
+        $result = $query->getResult();
+        return $result;
     }
+
 
 }

@@ -38,7 +38,7 @@ class Rapport
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Astreinte", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $astreinte;
 

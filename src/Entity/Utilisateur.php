@@ -6,79 +6,139 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     normalizationContext={"groups"={"user:read"}})
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
  */
-class Utilisateur
+class Utilisateur implements UserInterface
 {
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"astreinte:read","astreinte:write","user:read"})
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=40)
+     * @Groups({"astreinte:read","user:read"})
+     * @ORM\Column(type="array")
      */
     private $roles;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"astreinte:read","remplacement:read","user:read"})
      */
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Groups({"astreinte:read","user:read"})
      */
     private $mail;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Vivier", inversedBy="utilisateurs")
+     * @Groups({"astreinte:read","user:read"})
      */
     private $vivier;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Repos")
+     * @Groups({"astreinte:read","user:read"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Repos",cascade={"persist","remove"})
      */
-     private $repos;
+    private $repos;
 
-     /**
-      * @ORM\OneToMany(targetEntity="App\Entity\Astreinte", mappedBy="user")
-      */
-     private $astreintes;
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Astreinte", mappedBy="user")
+     */
+    private $astreintes;
+
 
      /**
       * @ORM\Column(type="string", length=255)
+      * @Groups({"astreinte:read", "remplacement:read","user:read"})
       */
      private $prenom;
 
-     /**
-      * @ORM\Column(type="string", length=255)
-      */
-     private $password;
-
-     public function __construct()
-     {
-         $this->astreintes = new ArrayCollection();
-     }
 
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $password;
 
+    public function __construct()
+    {
+        $this->astreintes = new ArrayCollection();
+    }
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $isActive;
+
+    /**
+     * @return mixed
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param mixed $isActive
+     */
+    public function setIsActive($isActive): void
+    {
+        $this->isActive = $isActive;
+    }
+
+    public function eraseCredentials()
+    {
+
+    }
+
+    public function getUsername()
+    {
+        return $this->mail;
+    }
+
+    public function getSalt()
+    {
+        // you *may* need a real salt depending on your encoder
+        // see section on salt below
+        return null;
+    }
+
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+
+//***********************************************************************
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getRoles(): ?string
-    {
-        return $this->roles;
-    }
+//    public function getRoles(): ?string
+//    {
+//        return $this->roles;
+//    }
 
-    public function setRoles(string $roles): self
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
 
@@ -188,3 +248,4 @@ class Utilisateur
         return $this;
     }
 }
+
