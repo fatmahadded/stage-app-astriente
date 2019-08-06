@@ -6,11 +6,8 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
@@ -41,7 +38,7 @@ class Utilisateur implements UserInterface
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255,)
      * @Groups({"astreinte:read","user:read"})
      */
     private $mail;
@@ -64,28 +61,26 @@ class Utilisateur implements UserInterface
     private $astreintes;
 
 
-     /**
-      * @ORM\Column(type="string", length=255)
-      * @Groups({"astreinte:read", "remplacement:read","user:read"})
-      */
-     private $prenom;
-
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"astreinte:read", "remplacement:read","user:read"})
+     */
+    private $prenom;
 
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $password;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $isActive;
 
     public function __construct()
     {
         $this->astreintes = new ArrayCollection();
     }
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $isActive;
 
     /**
      * @return mixed
@@ -128,9 +123,11 @@ class Utilisateur implements UserInterface
 
 //***********************************************************************
 
-    public function getId(): ?int
+    public function setRoles(array $roles): self
     {
-        return $this->id;
+        $this->roles = $roles;
+
+        return $this;
     }
 
 //    public function getRoles(): ?string
@@ -138,11 +135,9 @@ class Utilisateur implements UserInterface
 //        return $this->roles;
 //    }
 
-    public function setRoles(array $roles): self
+    public function getId(): ?int
     {
-        $this->roles = $roles;
-
-        return $this;
+        return $this->id;
     }
 
     public function getNom(): ?string
