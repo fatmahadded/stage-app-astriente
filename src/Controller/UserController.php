@@ -10,6 +10,7 @@ use App\Service\Interventionservice;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -34,6 +35,7 @@ class UserController extends AbstractController
         Request $request
     )
     {
+//        $user = $id;
         $year = '2019';
         if ($request->query->has('year')) {
             $year = $request->query->get('year');;

@@ -8,6 +8,7 @@ use App\Entity\JourFerie;
 use App\Entity\Rapport;
 use App\Repository\InterventionRepository;
 use App\Repository\JourFerieRepository;
+use App\Repository\RapportRepository;
 
 class Interventionservice
 {
@@ -163,41 +164,14 @@ $salaire=$nbrJoursOuvre*15+$nbrWeekend*43.38+$nbrJoursferie*34.85;
 return $salaire;
 
 }
+public function convertirEnPdf(Rapport $rapport , RapportRepository $rapportRepository){
+    if ($rapport) {
 
+        foreach ($rapport->getInterventions() as $intervention) {
 
+        }
+    }
 
-
-
-
-//    /**
-//     * @param Rapport |null $rapport
-//     * @return float|int
-//     */
-//    public function calculRepos2( $rapport)
-//    {
-//        $hours = 0;
-//        if($rapport){
-//            foreach ($rapport->getInterventions() as $intervention) {
-//                $dateDebutHour = $intervention->getHeureDebut()->format('H');
-//                $dateFinHour = $intervention->getHeureFin()->format('H');
-//                if (abs(60 -
-//                        $intervention->getHeureFin()->format('m') -
-//                        $intervention->getHeureDebut()->format('m')) > 0 ||
-//                    (abs(60 -
-//                            $intervention->getHeureFin()->format('s') -
-//                            $intervention->getHeureDebut()->format('s')) > 0 && abs(60 -
-//                            $intervention->getHeureFin()->format('m') -
-//                            $intervention->getHeureDebut()->format('m')) === 0)) {
-//                    $hours += $dateFinHour - $dateDebutHour + 1;
-//                } else {
-//                    $hours += ceil($dateFinHour - $dateDebutHour);
-//                }
-//
-//            }
-//            $hours*=1.25;
-//        }
-//
-//        return $hours;
-//    }
+}
 
 }

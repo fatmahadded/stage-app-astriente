@@ -3,12 +3,22 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * @ApiResource()
+ *
  * @ORM\Entity(repositoryClass="App\Repository\AstreinteRepository")
+ * @ApiResource(
+ *     normalizationContext={"groups"={"astreinte:read"}},
+ *     denormalizationContext={"groups"={"astreinte:write"}}
+ * )
+ * @UniqueEntity(fields={"semaine","vivier"})
+
  */
 class Astreinte
 {
@@ -16,6 +26,7 @@ class Astreinte
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"astreinte:read"})
      * @Serializer\Groups({"astreinte"})
      */
     private $id;
@@ -23,24 +34,28 @@ class Astreinte
     /**
      * @ORM\ManyToOne(targetEntity="Utilisateur", inversedBy="astreintes")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"astreinte:read","astreinte:write"})
      * @Serializer\Groups({"astreinte"})
      */
     private $user;
 
     /**
-     * @ORM\OneToOne(targetEntity="Paye", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Paye", cascade={"persist", "remove"})
+     * @Groups({"astreinte:read"})
      */
     private $paye;
 
     /**
-     * @ORM\OneToOne(targetEntity="Rapport", cascade={"persist", "remove"})
-     *  @Serializer\Groups({"astreinte"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Rapport", cascade={"persist", "remove"})
+     * @Groups({"astreinte:read"})
+     * @Serializer\Groups({"astreinte"})
      */
     private $rapport;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Semaine", inversedBy="astreintes")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Semaine", inversedBy="astreintes")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"astreinte:read","astreinte:write"})
      * @Serializer\Groups({"astreinte"})
      */
     private $semaine;
@@ -51,29 +66,26 @@ class Astreinte
      */
     private $salaire;
 
-    /**
-     * @return mixed
-     */
-    public function getSalaire()
-    {
-        return $this->salaire;
-    }
-
-    /**
-     * @param mixed $salaire
-     *
-     */
-    public function setSalaire($salaire): void
-    {
-        $this->salaire = $salaire;
-    }
 
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Vivier")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"astreinte:read","astreinte:write"})
+
      */
     private $vivier;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Remplacement", mappedBy="astreinte",cascade={"remove"})
+     * @Groups({"astreinte:read","astreinte:write"})
+     */
+    private $remplacements;
+
+    public function __construct()
+    {
+        $this->remplacements = new ArrayCollection();
+    }
 
     /**
      * @ORM\Column(type="float")
@@ -167,6 +179,53 @@ class Astreinte
         return $this;
     }
 
+    /**
+     * @return Collection|Remplacement[]
+     */
+    public function getRemplacements(): Collection
+    {
+        return $this->remplacements;
+    }
+
+    public function addRemplacement(Remplacement $remplacement): self
+    {
+        if (!$this->remplacements->contains($remplacement)) {
+            $this->remplacements[] = $remplacement;
+            $remplacement->setAstreinte($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRemplacement(Remplacement $remplacement): self
+    {
+        if ($this->remplacements->contains($remplacement)) {
+            $this->remplacements->removeElement($remplacement);
+            // set the owning side to null (unless already changed)
+            if ($remplacement->getAstreinte() === $this) {
+                $remplacement->setAstreinte(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSalaire()
+    {
+        return $this->salaire;
+    }
+
+    /**
+     * @param mixed $salaire
+     *
+     */
+    public function setSalaire($salaire): void
+    {
+        $this->salaire = $salaire;
+    }
 
 
 }

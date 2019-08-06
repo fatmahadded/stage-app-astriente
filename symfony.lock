@@ -95,6 +95,9 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "egulias/email-validator": {
+        "version": "2.1.10"
+    },
     "fig/link-util": {
         "version": "1.0.0"
     },
@@ -109,6 +112,9 @@
         "files": [
             "./config/packages/fos_rest.yaml"
         ]
+    },
+    "gesdinet/jwt-refresh-token-bundle": {
+        "version": "v0.7.1"
     },
     "hoa/compiler": {
         "version": "3.17.08.08"
@@ -172,6 +178,30 @@
             "./config/packages/prod/jms_serializer.yaml"
         ]
     },
+    "lcobucci/jwt": {
+        "version": "3.3.1"
+    },
+    "lexik/jwt-authentication-bundle": {
+        "version": "2.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "5b2157bcd5778166a5696e42f552ad36529a07a6"
+        },
+        "files": [
+            "./config/packages/lexik_jwt_authentication.yaml"
+        ]
+    },
+    "markbaker/complex": {
+        "version": "1.4.7"
+    },
+    "markbaker/matrix": {
+        "version": "1.1.4"
+    },
+    "namshi/jose": {
+        "version": "7.2.3"
+    },
     "nelmio/cors-bundle": {
         "version": "1.5",
         "recipe": {
@@ -202,6 +232,9 @@
     "phpdocumentor/type-resolver": {
         "version": "0.4.0"
     },
+    "phpoffice/phpspreadsheet": {
+        "version": "1.8.2"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -214,6 +247,9 @@
     "psr/log": {
         "version": "1.1.0"
     },
+    "psr/simple-cache": {
+        "version": "1.0.1"
+    },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
         "recipe": {
@@ -225,6 +261,9 @@
         "files": [
             "./config/packages/sensio_framework_extra.yaml"
         ]
+    },
+    "swiftmailer/swiftmailer": {
+        "version": "v6.2.1"
     },
     "symfony/asset": {
         "version": "v4.3.2"
@@ -386,6 +425,20 @@
         "symfony/service-contracts": {
             "version": "v1.1.5"
         },
+        "symfony/swiftmailer-bundle": {
+            "version": "2.5",
+            "recipe": {
+                "repo": "github.com/symfony/recipes",
+                "branch": "master",
+                "version": "2.5",
+                "ref": "429afc6c6778a1fdddb52a4f708cd94ff2c9960f"
+            },
+            "files": [
+                "./config/packages/dev/swiftmailer.yaml",
+                "./config/packages/swiftmailer.yaml",
+                "./config/packages/test/swiftmailer.yaml"
+            ]
+        },
         "symfony/translation-contracts": {
             "version": "v1.1.5"
         },
@@ -443,11 +496,17 @@
         "webmozart/assert": {
             "version": "1.4.0"
         },
+        "willdurand/jsonp-callback-validator": {
+            "version": "v1.1.0"
+        },
         "willdurand/negotiation": {
             "version": "v2.3.1"
         },
         "zendframework/zend-code": {
             "version": "3.3.1"
+        },
+        "zendframework/zend-eventmanager": {
+            "version": "3.2.1"
         }
     },
     "symfony/security-bundle": {
@@ -483,8 +542,19 @@
     "symfony/stopwatch": {
         "version": "v4.3.2"
     },
-    "symfony/templating": {
-        "version": "v4.3.2"
+    "symfony/swiftmailer-bundle": {
+        "version": "2.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "429afc6c6778a1fdddb52a4f708cd94ff2c9960f"
+        },
+        "files": [
+            "./config/packages/dev/swiftmailer.yaml",
+            "./config/packages/swiftmailer.yaml",
+            "./config/packages/test/swiftmailer.yaml"
+        ]
     },
     "symfony/translation-contracts": {
         "version": "v1.1.5"
@@ -542,9 +612,6 @@
     },
     "webmozart/assert": {
         "version": "1.4.0"
-    },
-    "willdurand/jsonp-callback-validator": {
-        "version": "v1.1.0"
     },
     "willdurand/negotiation": {
         "version": "v2.3.1"
