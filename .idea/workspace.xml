@@ -2,44 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84cbba28-441c-4637-b9f4-c149c9f95d89" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/config/jwt/private.pem" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/jwt/public.pem" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/packages/dev/swiftmailer.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/packages/gesdinet_jwt_refresh_token.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/packages/lexik_jwt_authentication.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/packages/swiftmailer.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/packages/test/swiftmailer.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/tmpExportAstreintes.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/UtilisateurController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Remplacement.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Migrations/Version20190729103913.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Migrations/Version20190731131042.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/RemplacementRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Service/UtilisateurService.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/accueil/email.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/utilisateur/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/stage-app-astriente.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/stage-app-astriente.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/api_platform.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/api_platform.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/routing.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/routing.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AccueilController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AccueilController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Astreinte.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Astreinte.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Semaine.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Semaine.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Utilisateur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Utilisateur.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Vivier.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Vivier.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/AccueilService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/AccueilService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/Interventionservice.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Interventionservice.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -267,7 +230,7 @@
       <path value="$PROJECT_DIR$/vendor/jms/serializer-bundle" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
     <option name="width" value="1228" />
     <option name="height" value="735" />
@@ -396,16 +359,15 @@
       <workItem from="1564648589633" duration="13344000" />
       <workItem from="1564731300781" duration="637000" />
       <workItem from="1565018690120" duration="2646000" />
-      <workItem from="1565080015145" duration="2821000" />
+      <workItem from="1565080015145" duration="3168000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36577000" />
+    <option name="totallyTimeSpent" value="36924000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31164902" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -420,7 +382,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.7463175" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.7463175" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50075644" side_tool="true" weight="0.1685761" />
       <window_info active="true" anchor="bottom" id="Command Line Tools Console" order="12" visible="true" weight="0.29787233" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
