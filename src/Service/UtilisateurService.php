@@ -8,6 +8,7 @@ use App\Entity\Astreinte;
 use App\Entity\Repos;
 use App\Entity\Utilisateur;
 use App\Repository\UtilisateurRepository;
+use App\Repository\VivierRepository;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -15,10 +16,11 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UtilisateurService
 {
 
-    public function __construct(UtilisateurRepository $repo, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(UtilisateurRepository $repo, UserPasswordEncoderInterface $passwordEncoder, VivierRepository $vivierRepository)
     {
         $this->repo = $repo;
         $this->passwordEncoder = $passwordEncoder;
+        $this->vivierRepository=$vivierRepository;
 
     }
 
@@ -29,7 +31,7 @@ class UtilisateurService
         $user->setNom($data["nom"]);
         $user->setPrenom($data["prenom"]);
         $user->setMail($data["mail"]);
-        $user->setVivier($data["vivier"]);
+        $user->setVivier($this->vivierRepository->find($data["vivier"]));
         $user->setPassword($this->passwordEncoder->encodePassword(
             $user,
             $data["password"]

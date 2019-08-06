@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -21,29 +22,25 @@ class Utilisateur implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"astreinte","astreinte:read","astreinte:write"})
-     * @Serializer\Groups({"astreinte","user"})
+     * @Groups({"astreinte:read","astreinte:write","user:read", "astreinte"})
      */
     private $id;
 
     /**
-     * @Groups({"astreinte:read","user:read"})
-     * @Serializer\Groups({"astreinte","user"})
+     * @Groups({"astreinte:read","user:read","astreinte","user" })
      * @ORM\Column(type="array")
      */
     private $roles;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Serializer\Groups({"astreinte"})
-     * @Groups({"astreinte:read","remplacement:read","user:read"})
+     * @Groups({"astreinte:read","remplacement:read","user:read","astreinte"})
      */
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Serializer\Groups({"astreinte"})
-     * @Groups({"astreinte:read","user:read"})
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Groups({"astreinte:read","user:read"},"astreinte")
      */
     private $mail;
 
@@ -54,22 +51,21 @@ class Utilisateur implements UserInterface
     private $vivier;
 
     /**
-     * @Groups({"astreinte:read","user:read"})
-     * @Serializer\Groups({"astreinte"})
+     * @Groups({"astreinte:read","user:read","astreinte"})
      * @ORM\OneToOne(targetEntity="App\Entity\Repos",cascade={"persist","remove"})
      */
      private $repos;
 
-     /**
-      * @ORM\OneToMany(targetEntity="App\Entity\Astreinte", mappedBy="user")
-      * @Serializer\Groups({"user"})
-      */
-     private $astreintes;
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Astreinte", mappedBy="user")
+     * @Groups({"user")
+     */
+    private $astreintes;
+
 
      /**
       * @ORM\Column(type="string", length=255)
-      * @Groups({"astreinte:read", "remplacement:read","user:read"})
-      * @Serializer\Groups({"astreinte"})
+      * @Groups({"astreinte:read", "remplacement:read","user:read","astreinte"})
       */
      private $prenom;
 
@@ -84,15 +80,15 @@ class Utilisateur implements UserInterface
       */
      private $password;
 
-    public function __construct()
-    {
-        $this->astreintes = new ArrayCollection();
-    }
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $isActive;
+    public function __construct()
+    {
+        $this->astreintes = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -135,9 +131,11 @@ class Utilisateur implements UserInterface
 
 //***********************************************************************
 
-    public function getId(): ?int
+    public function setRoles(array $roles): self
     {
-        return $this->id;
+        $this->roles = $roles;
+
+        return $this;
     }
 
 //    public function getRoles(): ?string
@@ -145,11 +143,9 @@ class Utilisateur implements UserInterface
 //        return $this->roles;
 //    }
 
-    public function setRoles(array $roles): self
+    public function getId(): ?int
     {
-        $this->roles = $roles;
-
-        return $this;
+        return $this->id;
     }
 
     public function getNom(): ?string
