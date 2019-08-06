@@ -20,16 +20,18 @@ class Repos
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="float")
      * @Serializer\Groups({"astreinte"})
      */
     private $nombre_heures;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      * @Serializer\Groups({"astreinte"})
      */
     private $repoSalaire;
+
+
 
     /**
      * @return mixed
@@ -63,4 +65,6 @@ class Repos
 
         return $this;
     }
+
+
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Repos;
 use App\Entity\Utilisateur;
 use App\Repository\AstreinteRepository;
 use App\Repository\JourFerieRepository;
@@ -46,10 +47,15 @@ class UserController extends AbstractController
 
         foreach ($astreintes as $astreinte) {
             $salaire=$interventionService->calculSalaireParAstreinte($astreinte->getRapport(),$jourFerieRepository);
-            $repos=$interventionService->calculRepos($astreinte->getRapport(),$jourFerieRepository);
-            $astreinte->setSalaire($salaire);
+            $reposCount =  $interventionService->calculRepos($astreinte->getRapport(),$jourFerieRepository);
+            $totalRepos+=$reposCount;
+
+            $repos= new Repos();
+            $repos->setNombreHeures($reposCount);
+            $repos->setRepoSalaire($salaire);
             $astreinte->setRepos($repos);
-            $totalRepos+=$astreinte->getRepos();
+            $astreinte->setSalaire($salaire);
+
             $totalSalaire+=$astreinte->getSalaire();
 //          $astreinte->setRepos($interventionService->calculRepos2($astreinte->getRapport(),$jourFerieRepository));
         }

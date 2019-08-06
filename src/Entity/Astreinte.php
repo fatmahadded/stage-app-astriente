@@ -88,7 +88,7 @@ class Astreinte
     }
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\OneToOne(targetEntity="App\Entity\Repos",cascade={"all"})
      * @Serializer\Groups({"astreinte"})
      */
     private $repos;
@@ -120,21 +120,7 @@ class Astreinte
         return $this->paye;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getRepos()
-    {
-        return $this->repos;
-    }
 
-    /**
-     * @param mixed $repos
-     */
-    public function setRepos($repos): void
-    {
-        $this->repos = $repos;
-    }
 
     public function setPaye(?Paye $paye): self
     {
@@ -225,6 +211,18 @@ class Astreinte
     public function setSalaire($salaire): void
     {
         $this->salaire = $salaire;
+    }
+
+
+    public function getRepos()
+    {
+        return $this->repos;
+    }
+
+
+    public function setRepos($repos)
+    {
+        $this->repos = $repos;
     }
 
 

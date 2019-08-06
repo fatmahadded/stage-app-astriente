@@ -9,8 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-use JMS\Serializer\Annotation as Serializer;
-
 /**
  * @ApiResource(
  *     normalizationContext={"groups"={"user:read"}})
@@ -39,8 +37,8 @@ class Utilisateur implements UserInterface
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
-     * @Groups({"astreinte:read","user:read"},"astreinte")
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"astreinte:read","user:read", "astreinte"})
      */
     private $mail;
 
@@ -58,7 +56,7 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Astreinte", mappedBy="user")
-     * @Groups({"user")
+     * @Groups({"user"})
      */
     private $astreintes;
 
