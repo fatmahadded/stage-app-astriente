@@ -3,14 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Utilisateur;
+use App\Repository\UtilisateurRepository;
 use App\Service\UtilisateurService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
 class UtilisateurController extends AbstractController
 {
@@ -25,15 +24,19 @@ class UtilisateurController extends AbstractController
     }
 
     /**
-     * @Route("/addUser",methods={"POST","HEAD"})
+     * @Route("/api/addUser",methods={"POST","HEAD"})
      */
-    public function addUser(Request $request,UtilisateurService $service)
+    public function addUser(Request $request, UtilisateurService $service)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $data = json_decode($request->getContent(),true);
-        $result=$service->addUilisateur($data,$entityManager);
+        $data = json_decode($request->getContent(), true);
+        $result = $service->addUilisateur($data, $entityManager);
+        var_dump($data["mail"]);
+        var_dump($data["password"]);
+        $service->sendConfirmationMail($data["mail"], $data["password"]);
         return $this->json($result);
     }
+
 
     /**
      * @Route("/user/mail/{mail}",methods={"GET","HEAD"})
@@ -46,7 +49,7 @@ class UtilisateurController extends AbstractController
     }
 
     /**
-     * @Route("/user/vivier/{vivier}",methods={"GET","HEAD"})
+     * @Route("/api/user/vivier/{vivier}",methods={"GET","HEAD"})
      */
     public function getUserVivier(UtilisateurService $service, $vivier)
     {
@@ -56,6 +59,16 @@ class UtilisateurController extends AbstractController
     }
 
 
+
+
+
+    /**
+     * @Route("/api/role/{role}", name="role",methods={"GET","HEAD"})
+     */
+    public function getRoleAdmin(UtilisateurRepository $repository, $role)
+    {
+        return $this->json($repository->findUserByRoleUser($role));
+    }
 
 
 }

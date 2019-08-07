@@ -5,9 +5,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/stage-app-astriente.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/stage-app-astriente.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/api_platform.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/api_platform.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/fos_rest.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/fos_rest.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UtilisateurController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UtilisateurController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/UtilisateurService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/UtilisateurService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,33 +24,57 @@
     </execution>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/AccueilController.php">
+        <entry file="file://$PROJECT_DIR$/src/Controller/UtilisateurController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="969">
-              <caret line="68" column="39" selection-start-line="68" selection-start-column="39" selection-end-line="68" selection-end-column="39" />
-              <folding>
-                <element signature="e#34#59#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="912">
+              <caret line="62" selection-start-line="62" selection-end-line="62" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Service/AccueilService.php">
+        <entry file="file://$PROJECT_DIR$/config/packages/security.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="84" selection-start-line="84" selection-end-line="85" />
+            <state relative-caret-position="1925">
+              <caret line="77" selection-start-line="77" selection-end-line="77" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="14025">
+              <caret line="561" column="10" selection-start-line="561" selection-start-column="10" selection-end-line="561" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.idea/stage-app-astriente.iml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="335">
+              <caret line="81" selection-start-line="81" selection-end-line="81" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Entity/Astreinte.php">
+        <entry file="file://$PROJECT_DIR$/.idea/php.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="14" column="54" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="54" />
+            <state relative-caret-position="312">
+              <caret line="114" selection-start-line="114" selection-end-line="114" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Service/UtilisateurService.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="525">
+              <caret line="37" column="14" selection-start-line="37" selection-start-column="14" selection-end-line="37" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -91,6 +117,8 @@
         <option value="$PROJECT_DIR$/config/bundles.php" />
         <option value="$PROJECT_DIR$/config/packages/api_platform.yaml" />
         <option value="$PROJECT_DIR$/config/packages/fos_rest.yaml" />
+        <option value="$PROJECT_DIR$/.idea/stage-app-astriente.iml" />
+        <option value="$PROJECT_DIR$/.idea/php.xml" />
       </list>
     </option>
   </component>
@@ -205,89 +233,57 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="676" />
-    <option name="width" value="697" />
-    <option name="height" value="735" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1346" />
+    <option name="height" value="688" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="Scope" currentSubView="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
             <path>
               <item name="stage-app-astriente" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="C:\wamp64\www\backend\stage-app-astriente" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="C:\Users\Windows\Desktop\Projet Symfonyy\stage-app-astriente" type="442cc68d:ScopeViewTreeModel$RootNode" />
             </path>
             <path>
               <item name="stage-app-astriente" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="C:\wamp64\www\backend\stage-app-astriente" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="C:\Users\Windows\Desktop\Projet Symfonyy\stage-app-astriente" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name=".idea" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="stage-app-astriente" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="C:\Users\Windows\Desktop\Projet Symfonyy\stage-app-astriente" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="config" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="stage-app-astriente" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="C:\wamp64\www\backend\stage-app-astriente" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="C:\Users\Windows\Desktop\Projet Symfonyy\stage-app-astriente" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="config" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="packages" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="stage-app-astriente" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="C:\wamp64\www\backend\stage-app-astriente" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="config" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="routes" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="stage-app-astriente" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="C:\wamp64\www\backend\stage-app-astriente" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="C:\Users\Windows\Desktop\Projet Symfonyy\stage-app-astriente" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="stage-app-astriente" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="C:\wamp64\www\backend\stage-app-astriente" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="C:\Users\Windows\Desktop\Projet Symfonyy\stage-app-astriente" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="Controller" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="stage-app-astriente" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="C:\wamp64\www\backend\stage-app-astriente" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="C:\Users\Windows\Desktop\Projet Symfonyy\stage-app-astriente" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="Service" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="stage-app-astriente" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stage-app-astriente" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="stage-app-astriente" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stage-app-astriente" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="stage-app-astriente" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stage-app-astriente" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="stage-app-astriente" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stage-app-astriente" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="stage-app-astriente" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stage-app-astriente" type="462c0819:PsiDirectoryNode" />
-              <item name="var" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -334,12 +330,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22523000" />
+    <option name="totallyTimeSpent" value="22739000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26096824" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24962178" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -352,7 +348,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.25859246" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3289689" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -416,8 +412,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Service/UtilisateurService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-127">
-          <caret line="34" column="57" selection-start-line="34" selection-start-column="57" selection-end-line="34" selection-end-column="57" />
+        <state relative-caret-position="525">
+          <caret line="37" column="14" selection-start-line="37" selection-start-column="14" selection-end-line="37" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -460,24 +456,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/friendsofsymfony/rest-bundle/EventListener/FormatListener.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="621">
-          <caret line="70" column="3" selection-start-line="70" selection-start-column="3" selection-end-line="70" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/friendsofsymfony/rest-bundle/EventListener/FormatListener.php" />
     <entry file="file://$PROJECT_DIR$/src/Controller/UtilisateurController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="27" column="23" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="23" />
+        <state relative-caret-position="912">
+          <caret line="62" selection-start-line="62" selection-end-line="62" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/packages/security.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="44" column="34" selection-start-line="44" selection-start-column="29" selection-end-line="44" selection-end-column="34" />
+        <state relative-caret-position="1925">
+          <caret line="77" selection-start-line="77" selection-end-line="77" />
         </state>
       </provider>
     </entry>
@@ -522,13 +512,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor - Copie/friendsofsymfony/rest-bundle/Tests/EventListener/MimeTypeListenerTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor - Copie/friendsofsymfony/rest-bundle/Tests/EventListener/MimeTypeListenerTest.php" />
     <entry file="file://$PROJECT_DIR$/src/Controller/RapportController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="193">
@@ -554,6 +538,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="14" column="54" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="14025">
+          <caret line="561" column="10" selection-start-line="561" selection-start-column="10" selection-end-line="561" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/stage-app-astriente.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="335">
+          <caret line="81" selection-start-line="81" selection-end-line="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/php.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="114" selection-start-line="114" selection-end-line="114" />
         </state>
       </provider>
     </entry>

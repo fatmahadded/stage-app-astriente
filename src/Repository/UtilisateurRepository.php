@@ -47,4 +47,16 @@ class UtilisateurRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+    public function findUserByRoleUser($role)
+    {
+        return $this->getEntityManager()->createQuery
+        (
+            "select m from App\Entity\Utilisateur m WHERE m.roles like ?1 ORDER BY m.nom ASC ")
+            ->setParameter(1,'%"'.$role.'"%')
+            ->getResult();
+    }
+
+
 }

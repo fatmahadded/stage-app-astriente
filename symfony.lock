@@ -101,6 +101,18 @@
     "fig/link-util": {
         "version": "1.0.0"
     },
+    "friendsofsymfony/rest-bundle": {
+        "version": "2.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.2",
+            "ref": "cad41ef93d6150067ae2bb3c7fd729492dff6f0a"
+        },
+        "files": [
+            "./config/packages/fos_rest.yaml"
+        ]
+    },
     "gesdinet/jwt-refresh-token-bundle": {
         "version": "v0.7.1"
     },
@@ -258,6 +270,9 @@
             "./.env"
         ]
     },
+    "symfony/form": {
+        "version": "v4.3.2"
+    },
     "symfony/framework-bundle": {
         "version": "4.2",
         "recipe": {
@@ -277,6 +292,9 @@
             "./src/Kernel.php"
         ]
     },
+    "symfony/http-client-contracts": {
+        "version": "v1.1.5"
+    },
     "symfony/http-foundation": {
         "version": "v4.3.2"
     },
@@ -284,6 +302,9 @@
         "version": "v4.3.2"
     },
     "symfony/inflector": {
+        "version": "v4.3.2"
+    },
+    "symfony/intl": {
         "version": "v4.3.2"
     },
     "symfony/maker-bundle": {
@@ -298,8 +319,14 @@
     "symfony/mime": {
         "version": "v4.3.2"
     },
+    "symfony/options-resolver": {
+        "version": "v4.3.2"
+    },
     "symfony/orm-pack": {
         "version": "v1.0.6"
+    },
+    "symfony/polyfill-intl-icu": {
+        "version": "v1.11.0"
     },
     "symfony/polyfill-intl-idn": {
         "version": "v1.11.0"
@@ -482,6 +509,9 @@
             "./config/packages/test/swiftmailer.yaml"
         ]
     },
+    "symfony/templating": {
+        "version": "v4.3.2"
+    },
     "symfony/translation-contracts": {
         "version": "v1.1.5"
     },
@@ -541,6 +571,9 @@
     },
     "webmozart/assert": {
         "version": "1.4.0"
+    },
+    "willdurand/jsonp-callback-validator": {
+        "version": "v1.1.0"
     },
     "willdurand/negotiation": {
         "version": "v2.3.1"
