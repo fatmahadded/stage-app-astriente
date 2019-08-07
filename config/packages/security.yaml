@@ -51,7 +51,7 @@ security:
                 path: /logout
                 invalidate_session: true
     access_control:
-        - { path: ^/api/utilisateurs, roles: ROLE_ADMIN, methods: [POST, PUT, GET, DELETE] }
+#        - { path: ^/api/utilisateurs, roles: ROLE_ADMIN, methods: [POST, PUT, GET, DELETE] }
         - { path: ^/api/viviers, roles: ROLE_USER, methods: [POST, PUT, GET, DELETE] }
         - { path: ^/api/semaines, roles: ROLE_USER, methods: [GET] }
         - { path: ^/api/jour_feries, roles: ROLE_USER, methods: [GET] }
@@ -71,4 +71,4 @@ security:
         - { path: ^/accueil/astreinte, roles: ROLE_USER, methods: [GET] }
         - { path: ^/accueil/astreinte/xls, roles: ROLE_USER, methods: [GET] }
         - { path: ^/accueil/add/astreinte, roles: ROLE_USER, methods: [POST] }
-#        - { path: ^/addUser, roles: ROLE_ADMIN, methods: [POST] }
+        - { path: ^/addUser, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [POST] }

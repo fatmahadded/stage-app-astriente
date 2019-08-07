@@ -33,11 +33,12 @@ class Rapport
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Retour", cascade={"persist", "remove"})
      */
+
     private $retours;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Astreinte", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $astreinte;
 
@@ -116,9 +117,9 @@ class Rapport
         return $this->retours;
     }
 
-    public function setRetours(?Retour $retours): self
+    public function setRetours(?Retour $retour): self
     {
-        $this->retours = $retours;
+        $this->retours=$retour;
 
         return $this;
     }
