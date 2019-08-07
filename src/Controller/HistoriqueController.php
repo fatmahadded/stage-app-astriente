@@ -32,6 +32,8 @@ class HistoriqueController extends AbstractController
 
         return $this->render('historique/index.html.twig', ['astreintes'=>$res]);
 
+
+
     }
 
 
