@@ -16,13 +16,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UtilisateurService
 {
 
-<<<<<<< Updated upstream
-    public function __construct(UtilisateurRepository $repo, UserPasswordEncoderInterface $passwordEncoder, VivierRepository $vivierRepository)
-    {
-        $this->repo = $repo;
-        $this->passwordEncoder = $passwordEncoder;
-        $this->vivierRepository=$vivierRepository;
-=======
+
     private $vivierRepsitory;
 
     public function __construct(UtilisateurRepository $repo,
@@ -34,7 +28,7 @@ class UtilisateurService
         $this->passwordEncoder = $passwordEncoder;
         $this->vivierRepsitory = $vivierRepository;
         $this->mailer = $mailer;
->>>>>>> Stashed changes
+
 
     }
 
@@ -55,14 +49,11 @@ class UtilisateurService
         $user->setNom($data["nom"]);
         $user->setPrenom($data["prenom"]);
         $user->setMail($data["mail"]);
-<<<<<<< Updated upstream
-        $user->setVivier($this->vivierRepository->find($data["vivier"]));
-=======
-<<<<<<< Updated upstream
-=======
+
+//        $user->setVivier($this->vivierRepository->find($data["vivier"]));
+
         $user->setVivier($this->vivierRepsitory->find($data["vivier"]));
->>>>>>> Stashed changes
->>>>>>> Stashed changes
+
         $user->setPassword($this->passwordEncoder->encodePassword(
             $user,
             $data["password"]

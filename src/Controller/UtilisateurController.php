@@ -37,46 +37,30 @@ class UtilisateurController extends AbstractController
         return $this->json($result);
     }
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
+
     /**
      * @Route("/user/mail/{mail}",methods={"GET","HEAD"})
      */
     public function getUserMail(UtilisateurService $service, $mail)
     {
 
-<<<<<<< Updated upstream
         $result=$service->getUserMail($mail);
-=======
-        $result = $service->getUserMail($mail);
->>>>>>> Stashed changes
         return $this->json($result);
     }
 
     /**
-<<<<<<< Updated upstream
-     * @Route("/user/vivier/{vivier}",methods={"GET","HEAD"})
-=======
      * @Route("/api/user/vivier/{vivier}",methods={"GET","HEAD"})
->>>>>>> Stashed changes
      */
     public function getUserVivier(UtilisateurService $service, $vivier)
     {
 
-<<<<<<< Updated upstream
         $result=$service->getUserVivier($vivier);
         return $this->json($result);
     }
 
 
 
-=======
-        $result = $service->getUserVivier($vivier);
-        return $this->json($result);
-    }
+
 
     /**
      * @Route("/api/role/{role}", name="role",methods={"GET","HEAD"})
@@ -85,7 +69,6 @@ class UtilisateurController extends AbstractController
     {
         return $this->json($repository->findUserByRoleUser($role));
     }
->>>>>>> Stashed changes
->>>>>>> Stashed changes
+
 
 }
