@@ -41,7 +41,7 @@ class Utilisateur implements UserInterface
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255)
      * @Groups({"astreinte:read","user:read"})
      */
     private $mail;

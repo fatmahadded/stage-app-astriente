@@ -75,4 +75,5 @@ security:
         - { path: ^/api/user/vivier, roles: ROLE_ADMIN, methods: [POST] }
         - { path: ^/api/role, roles: ROLE_ADMIN, methods: [GET] }
         - { path: ^/api/addVivier, roles: ROLE_ADMIN, methods: [POST] }
+        - { path: ^/api/rapport, roles: ROLE_USER, methods: [POST] }
 

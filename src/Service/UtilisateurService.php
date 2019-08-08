@@ -58,6 +58,7 @@ class UtilisateurService
             $user,
             $data["password"]
         ));
+
         $roles = [];
         array_push($roles, $data["roles"]);
         $user->setRoles($roles);
