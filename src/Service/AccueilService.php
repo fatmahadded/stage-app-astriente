@@ -5,13 +5,12 @@ namespace App\Service;
 
 
 use App\Entity\Astreinte;
-use App\Entity\Vivier;
 use App\Repository\AstreinteRepository;
 use App\Repository\SemaineRepository;
 use App\Repository\UtilisateurRepository;
 use App\Repository\VivierRepository;
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\Validator\Constraints\Date;
+
 
 class AccueilService
 {

@@ -9,8 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
-
 
 
 /**
@@ -24,25 +22,25 @@ class Utilisateur implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"astreinte:read","astreinte:write","user:read"})
+     * @Groups({"astreinte:read","astreinte:write","user:read", "astreinte"})
      */
     private $id;
 
     /**
-     * @Groups({"astreinte:read","user:read"})
+     * @Groups({"astreinte:read","user:read","astreinte","user" })
      * @ORM\Column(type="array")
      */
     private $roles;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"astreinte:read","remplacement:read","user:read"})
+     * @Groups({"astreinte:read","remplacement:read","user:read","astreinte"})
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"astreinte:read","user:read"})
+     * @Groups({"astreinte:read","user:read", "astreinte"})
      */
     private $mail;
 
@@ -53,40 +51,47 @@ class Utilisateur implements UserInterface
     private $vivier;
 
     /**
-     * @Groups({"astreinte:read","user:read"})
+     * @Groups({"astreinte:read","user:read","astreinte"})
      * @ORM\OneToOne(targetEntity="App\Entity\Repos",cascade={"persist","remove"})
      */
-    private $repos;
+     private $repos;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Astreinte", mappedBy="user")
+     * @Groups({"user"})
      */
     private $astreintes;
 
 
      /**
       * @ORM\Column(type="string", length=255)
-      * @Groups({"astreinte:read", "remplacement:read","user:read"})
+      * @Groups({"astreinte:read", "remplacement:read","user:read","astreinte"})
       */
      private $prenom;
 
-
-
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="float")
      */
-    private $password;
+    private $solde;
 
-    public function __construct()
-    {
-        $this->astreintes = new ArrayCollection();
-    }
+     /**
+      * @ORM\Column(type="string", length=255)
+      */
+     private $password;
+
+
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $isActive;
 
+
+    public function __construct()
+    {
+        $this->astreintes = new ArrayCollection();
+    }
     /**
      * @return mixed
      */
@@ -115,7 +120,8 @@ class Utilisateur implements UserInterface
 
     public function getSalt()
     {
-
+        // you *may* need a real salt depending on your encoder
+        // see section on salt below
         return null;
     }
 
@@ -238,5 +244,20 @@ class Utilisateur implements UserInterface
 
         return $this;
     }
-}
 
+    /**
+     * @return mixed
+     */
+    public function getSolde()
+    {
+        return $this->solde;
+    }
+
+    /**
+     * @param mixed $solde
+     */
+    public function setSolde($solde): void
+    {
+        $this->solde = $solde;
+    }
+}

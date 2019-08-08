@@ -12,6 +12,7 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\Annotations\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Route("/api", name="api_intervention")
@@ -24,6 +25,7 @@ class RapportController extends AbstractFOSRestController
      * @param EntityManagerInterface $entityManager
      * @return Rapport[]
      */
+
     public function addRapportToBase(Request $request,EntityManagerInterface $entityManager){
         $data = $request->request->all()['rapportData'];
         $retour = new Retour();
@@ -47,8 +49,8 @@ class RapportController extends AbstractFOSRestController
                 $Intervention->setDate($date);
             } catch (\Exception $e) {
             }
-            $Intervention->setHeureDebut($interventionData["heureDebut"]);
-            $Intervention->setHeureFin($interventionData["heureFin"]);
+            $Intervention->setHeureDebut(new \DateTime($interventionData["heureDebut"]));
+            $Intervention->setHeureFin(new \DateTime($interventionData["heureFin"]));
             $rapport->addIntervention($Intervention);
             $entityManager->persist($Intervention);
         }
@@ -58,6 +60,8 @@ class RapportController extends AbstractFOSRestController
         $entityManager->persist($rapport);
 
         $entityManager->flush();
+
+        return $this->json($rapport);
 
     }
 

@@ -19,6 +19,8 @@ class JourFerieRepository extends ServiceEntityRepository
         parent::__construct($registry, JourFerie::class);
     }
 
+
+
     // /**
     //  * @return JourFerie[] Returns an array of JourFerie objects
     //  */
