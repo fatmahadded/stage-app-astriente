@@ -6,7 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource()
@@ -18,7 +18,7 @@ class Rapport
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Serializer\Groups({"astreinte"})
+     * @Groups({"astreinte"})
      */
     private $id;
 
@@ -35,11 +35,12 @@ class Rapport
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Retour", cascade={"persist", "remove"})
      */
+
     private $retours;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Astreinte", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $astreinte;
 
@@ -118,9 +119,9 @@ class Rapport
         return $this->retours;
     }
 
-    public function setRetours(?Retour $retours): self
+    public function setRetours(?Retour $retour): self
     {
-        $this->retours = $retours;
+        $this->retours=$retour;
 
         return $this;
     }

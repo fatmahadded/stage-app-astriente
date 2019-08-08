@@ -7,8 +7,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+//use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\Groups;
-use JMS\Serializer\Annotation as Serializer;
+
 
 /**
  *
@@ -26,16 +27,14 @@ class Astreinte
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"astreinte:read"})
-     * @Serializer\Groups({"astreinte"})
+     * @Groups({"astreinte:read","astreinte"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="Utilisateur", inversedBy="astreintes")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"astreinte:read","astreinte:write"})
-     * @Serializer\Groups({"astreinte"})
+     * @Groups({"astreinte:read","astreinte:write","astreinte"})
      */
     private $user;
 
@@ -47,22 +46,20 @@ class Astreinte
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Rapport", cascade={"persist", "remove"})
-     * @Groups({"astreinte:read"})
-     * @Serializer\Groups({"astreinte"})
+     * @Groups({"astreinte:read","astreinte"})
      */
     private $rapport;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Semaine", inversedBy="astreintes")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"astreinte:read","astreinte:write"})
-     * @Serializer\Groups({"astreinte"})
+     * @Groups({"astreinte:read","astreinte:write","astreinte"})
      */
     private $semaine;
 
     /**
      * @ORM\Column(type="float",nullable=true)
-     * @Serializer\Groups({"astreinte"})
+     * @Groups({"astreinte"})
      */
     private $salaire;
 
@@ -89,7 +86,7 @@ class Astreinte
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Repos",cascade={"all"})
-     * @Serializer\Groups({"astreinte"})
+     * @Groups({"astreinte"})
      */
     private $repos;
 

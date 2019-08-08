@@ -16,28 +16,51 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UtilisateurService
 {
 
-    public function __construct(UtilisateurRepository $repo, UserPasswordEncoderInterface $passwordEncoder, VivierRepository $vivierRepository)
+
+    private $vivierRepsitory;
+
+    public function __construct(UtilisateurRepository $repo,
+                                UserPasswordEncoderInterface $passwordEncoder,
+                                VivierRepository $vivierRepository,
+                                \Swift_Mailer $mailer)
     {
         $this->repo = $repo;
         $this->passwordEncoder = $passwordEncoder;
-        $this->vivierRepository=$vivierRepository;
+        $this->vivierRepsitory = $vivierRepository;
+        $this->mailer = $mailer;
 
+
+    }
+
+    public function sendConfirmationMail($email, $pass)
+    {
+        $message = (new \Swift_Message('Confirmation de compte'))
+            ->setFrom('astreinteapp@gmail.com')
+            ->setTo('hajer.harbaoui@esprit.tn')
+            ->setBody('Bienvenue parmis nous. Votre USERNAME est : ' . $email .
+                ' et votre PASSWORD est : ' . $pass . ' .Bon travail.', 'text/plain');
+        $this->mailer->send($message);
+        return null;
     }
 
     public function addUilisateur($data, EntityManager $em)
     {
-
         $user = new Utilisateur();
         $user->setNom($data["nom"]);
         $user->setPrenom($data["prenom"]);
         $user->setMail($data["mail"]);
-        $user->setVivier($this->vivierRepository->find($data["vivier"]));
+
+//        $user->setVivier($this->vivierRepository->find($data["vivier"]));
+
+        $user->setVivier($this->vivierRepsitory->find($data["vivier"]));
+
         $user->setPassword($this->passwordEncoder->encodePassword(
             $user,
             $data["password"]
-                    ));
-        $roles=[];
-        array_push($roles,$data["roles"]);
+        ));
+
+        $roles = [];
+        array_push($roles, $data["roles"]);
         $user->setRoles($roles);
         $user->setIsActive('Actif');
         $repo = new Repos();
@@ -45,6 +68,9 @@ class UtilisateurService
         $user->setRepos($repo);
         $em->persist($user);
         $em->flush();
+        var_dump($user->getMail());
+        var_dump($data["password"]);
+        //$this->sendConfirmationMail($user->getMail(), $data["password"]);
         return $user;
     }
 

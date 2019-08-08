@@ -6,8 +6,10 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 
 /**
  * @ApiResource(
@@ -79,15 +81,17 @@ class Utilisateur implements UserInterface
      private $password;
 
 
+
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $isActive;
+
+
     public function __construct()
     {
         $this->astreintes = new ArrayCollection();
     }
-
     /**
      * @return mixed
      */
@@ -126,24 +130,16 @@ class Utilisateur implements UserInterface
         return $this->roles;
     }
 
-
-//***********************************************************************
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
 
         return $this;
-    }
-
-//    public function getRoles(): ?string
-//    {
-//        return $this->roles;
-//    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getNom(): ?string

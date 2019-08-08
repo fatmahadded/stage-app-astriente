@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource()
@@ -16,18 +16,19 @@ class Repos
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"astreinte"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="float")
-     * @Serializer\Groups({"astreinte"})
+     * @Groups({"astreinte"})
      */
-    private $nombre_heures;
+    private $nombreHeures;
 
     /**
      * @ORM\Column(type="float", nullable=true)
-     * @Serializer\Groups({"astreinte"})
+     * @Groups({"astreinte"})
      */
     private $repoSalaire;
 
@@ -54,17 +55,40 @@ class Repos
         return $this->id;
     }
 
-    public function getNombreHeures(): ?string
+    /**
+     * @return mixed
+     */
+    public function getNombreHeures()
     {
-        return $this->nombre_heures;
+        return $this->nombreHeures;
     }
 
-    public function setNombreHeures(string $nombre_heures): self
+    /**
+     * @param mixed $nombreHeures
+     */
+    public function setNombreHeures($nombreHeures): void
     {
-        $this->nombre_heures = $nombre_heures;
-
-        return $this;
+        $this->nombreHeures = $nombreHeures;
     }
+
+
+
+
+//    public function getNombreHeures(): ?string
+//    {
+//        return $this->nombreHeures;
+//    }
+//
+//    public function setNombreHeures( $nombreHeures): self
+//    {
+//        $this->nombreHeures = $nombreHeures;
+//
+//        return $this;
+//    }
+
+
+
+
 
 
 }

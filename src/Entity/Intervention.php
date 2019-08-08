@@ -38,7 +38,7 @@ class Intervention
      */
     private $heureFin;
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float",nullable=true)
      */
 
     private $salaire;
@@ -98,7 +98,7 @@ class Intervention
         return $this;
     }
 
-    public function getHeureDebut(): ?\DateTimeInterface
+    public function getHeureDebut(): ? \DateTimeInterface
     {
         return $this->heureDebut;
     }
@@ -110,7 +110,7 @@ class Intervention
         return $this;
     }
 
-    public function getHeureFin(): ?\DateTimeInterface
+    public function getHeureFin(): ? \DateTimeInterface
     {
         return $this->heureFin;
     }

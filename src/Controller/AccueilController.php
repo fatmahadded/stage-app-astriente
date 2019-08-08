@@ -2,13 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Astreinte;
 use App\Repository\SemaineRepository;
 use App\Service\AccueilService;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-
-
-use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,7 +22,6 @@ class AccueilController extends AbstractController
         ]);
     }
 
-    //cette méthode retourne les semaines que l'utilisateur peut modifier
 
     /**
      * @Route("/accueil/semaines", name="accueil",methods={"GET","HEAD"})

@@ -2,7 +2,6 @@ security:
     encoders:
         App\Entity\Utilisateur:
             algorithm: bcrypt
-
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_ADMIN_NAT: ROLE_ADMIN
@@ -52,12 +51,13 @@ security:
                 path: /logout
                 invalidate_session: true
     access_control:
-        - { path: ^/api/utilisateurs, roles: ROLE_ADMIN, methods: [POST, PUT, GET, DELETE] }
         - { path: ^/api/viviers, roles: ROLE_USER, methods: [POST, PUT, GET, DELETE] }
+        - { path: ^/api/utilisateurs, roles: ROLE_ADMIN, methods: [POST, PUT, GET, DELETE] }
+        - { path: ^/api/viviers, roles: ROLE_ADMIN, methods: [POST, PUT, GET, DELETE] }
         - { path: ^/api/semaines, roles: ROLE_USER, methods: [GET] }
         - { path: ^/api/jour_feries, roles: ROLE_USER, methods: [GET] }
         - { path: ^/api/astreintes, roles: ROLE_USER, methods: [POST, PUT, GET, DELETE] }
-        - { path: ^/api/entites, roles: ROLE_USER, methods: [POST, PUT, GET, DELETE] }
+        - { path: ^/api/entites, roles: ROLE_ADMIN, methods: [POST, PUT, GET, DELETE] }
         - { path: ^/api/interventions, roles: ROLE_USER, methods: [POST, PUT, GET, DELETE] }
         - { path: ^/api/payes, roles: ROLE_USER, methods: [POST, PUT, GET, DELETE] }
         - { path: ^/api/rapports, roles: ROLE_USER, methods: [POST, PUT, GET, DELETE] }
@@ -72,4 +72,9 @@ security:
         - { path: ^/accueil/astreinte, roles: ROLE_USER, methods: [GET] }
         - { path: ^/accueil/astreinte/xls, roles: ROLE_USER, methods: [GET] }
         - { path: ^/accueil/add/astreinte, roles: ROLE_USER, methods: [POST] }
-#        - { path: ^/addUser, roles: ROLE_ADMIN, methods: [POST] }
+        - { path: ^/api/addUser, roles: ROLE_ADMIN, methods: [POST] }
+        - { path: ^/api/user/vivier, roles: ROLE_ADMIN, methods: [POST] }
+        - { path: ^/api/role, roles: ROLE_ADMIN, methods: [GET] }
+        - { path: ^/api/addVivier, roles: ROLE_ADMIN, methods: [POST] }
+        - { path: ^/api/rapport, roles: ROLE_USER, methods: [POST] }
+

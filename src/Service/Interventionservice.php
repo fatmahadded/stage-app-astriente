@@ -34,8 +34,8 @@ class Interventionservice
 
         if ($rapport) {
             foreach ($rapport->getInterventions() as $intervention) {
-                $heureDebut=$intervention->getHeureDebut()->format('H') ;
-                $heureFin=$intervention->getHeureFin()->format('H') ;
+                $heureDebut=$intervention->getHeureDebut()->format('H');
+                $heureFin=$intervention->getHeureFin()->format('H');
 
             $heureFin2=$heureFin;
             $heureDebut2=$heureDebut;
@@ -158,20 +158,21 @@ public function calculSalaireParAstreinte($rapport,$jourFerieRepository) {
             }
 
         }
-$salaire=$nbrJoursOuvre*15+$nbrWeekend*43.38+$nbrJoursferie*34.85;
+$salaire= $nbrJoursOuvre*15+$nbrWeekend*43.38+$nbrJoursferie*34.85;
         }
 
 return $salaire;
 
 }
-public function convertirEnPdf(Rapport $rapport , RapportRepository $rapportRepository){
-    if ($rapport) {
 
-        foreach ($rapport->getInterventions() as $intervention) {
-
-        }
-    }
-
-}
+//public function convertirEnPdf(Rapport $rapport , RapportRepository $rapportRepository){
+//    if ($rapport) {
+//
+//        foreach ($rapport->getInterventions() as $intervention) {
+//
+//        }
+//    }
+//
+//}
 
 }

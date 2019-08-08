@@ -20,29 +20,25 @@ class Semaine
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"astreinte:read"})
-     * @Serializer\Groups({"astreinte"})
+     * @Groups({"astreinte:read","astreinte"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"astreinte:read"})
-     * @Serializer\Groups({"astreinte"})
+     * @Groups({"astreinte:read","astreinte"})
      */
     private $numSemaine;
 
     /**
      * @ORM\Column(type="date")
-     * @Groups({"astreinte:read"})
-     * @Serializer\Groups({"astreinte"})
+     * @Groups({"astreinte:read","astreinte"})
      */
     private $debutSemaine;
 
     /**
      * @ORM\Column(type="date")
-     * @Groups({"astreinte:read"})
-     * @Serializer\Groups({"astreinte"})
+     * @Groups({"astreinte:read","astreinte"})
      */
     private $finSemaine;
 
