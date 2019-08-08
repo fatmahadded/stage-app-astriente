@@ -31,14 +31,12 @@ class RappelCommand extends Command
         $this
             ->setName('app:rappel-rapport')
 
-//            ->addArgument('sec', InputArgument::REQUIRED, 'seconds.')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('done');
-        // $output->writeln('sec: '.$inpuclqqt->getArgument('sec'));
         $users=$this->service->getU($this->repo);
         foreach($users as $u )
         {

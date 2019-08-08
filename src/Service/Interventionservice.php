@@ -74,12 +74,10 @@ class Interventionservice
 
                 }
                 $jf=$jourFerieRepository->findAll();
-//                $test=0;
                 foreach ( $jf as $jourFerie) {
                     if($jourFerie->getJour() == $intervention->getDate()) {
                         $nbrJoursOuvre--;
                         $nbrJoursferie++;
-//                        $test++;
                     }
                 }
                 if ($intervention->getDate()->format('w')==0 || $intervention->getDate()->format('w')==6 ) {
