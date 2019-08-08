@@ -87,4 +87,14 @@ class AstreinteRepository extends ServiceEntityRepository
 
         return $query;
     }
+
+    public function findusers()
+    {
+        return $this->getEntityManager()->createQuery
+        (
+            "select m from App\Entity\Astreinte m WHERE m.rapport IS NULL ")
+            ->getResult();
+    }
+
+
 }

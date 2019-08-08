@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Astreinte;
+use App\Entity\Rapport;
 use App\Entity\Repos;
 use App\Entity\Utilisateur;
 use App\Repository\AstreinteRepository;
@@ -11,11 +12,14 @@ use App\Repository\RapportRepository;
 use App\Repository\UtilisateurRepository;
 use App\Service\HistoriqueService;
 use App\Service\Interventionservice;
+use App\Service\RapportService;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -73,6 +77,35 @@ class HistoriqueController extends AbstractController
 //        return $user->getAstreintes();
 
     }
+    /**
+     * @Rest\Get("api/rapport/{id}", name="rapport_astreine", requirements={"id"="\d+"})
+     * @ParamConverter("id", class="App\Entity\Rapport")
+     */
+    public function getPDF(RapportService $service,Rapport $rapport,RapportRepository $rapportRepository) {
+        $interventions=$service->getPdf($rapport,$rapportRepository);
+
+
+            $html = $this->renderView('historique/index.html.twig', array(
+                'intervention'  => $interventions
+            ));
+
+            return new PdfResponse(
+                $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+                'file.pdf'
+            );
+
+    }
+
+//    /**
+//     * @Route("/test",methods={"GET","HEAD"})
+//     */
+//
+//    public function getU(AstreinteRepository $repo)
+//    {
+//        $result= $repo->findusers();
+//        return $this->json($result);
+//    }
+
 
 
 

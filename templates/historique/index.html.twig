@@ -4,19 +4,21 @@
         <table style="width:100%">
             <thead>
             <tr>
-                <th>id</th>
-{#                <th>prenom</th>#}
-{#                <th>age</th>#}
-{#                <th>Groupe_id</th>#}
+                <th>Label:</th>
+                <th>Date:</th>
+                <th>heure_debut</th>
+                <th>heure_fin</th>
 {#                <th> NomGroupe</th>#}
 {#                <th>text</th>#}
             </tr>
             </thead>
-            {% for astreinte in astreintes %}
+            {% for intervention in interventions %}
 
                 <tr>
-                    <td>{{ astreinte.semaine.debutSemaine | date('d/m/Y')}}</td>
-
+                    <td>{{ intervention.label}}</td>
+                    <td>{{ intervention.date | date('d/m/Y')}}</td>
+                    <td> !!</td>
+                    <td>!!!</td>
                 </tr>
 
             {% endfor %}

@@ -61,7 +61,7 @@ class Astreinte
     private $semaine;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float",nullable=true)
      * @Serializer\Groups({"astreinte"})
      */
     private $salaire;
