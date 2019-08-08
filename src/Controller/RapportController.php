@@ -37,7 +37,6 @@ class RapportController extends AbstractFOSRestController
 
         $rapport = new Rapport();
         $rapport->setNote($data['note']);
-
         $rapport->setRetours($retour);
         foreach ($data['Interventions'] as $interventionData){
             $Intervention = new Intervention();
