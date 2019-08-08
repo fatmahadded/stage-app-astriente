@@ -49,16 +49,11 @@ class UtilisateurService
         $user->setNom($data["nom"]);
         $user->setPrenom($data["prenom"]);
         $user->setMail($data["mail"]);
-
-//        $user->setVivier($this->vivierRepository->find($data["vivier"]));
-
         $user->setVivier($this->vivierRepsitory->find($data["vivier"]));
-
         $user->setPassword($this->passwordEncoder->encodePassword(
             $user,
             $data["password"]
         ));
-
         $roles = [];
         array_push($roles, $data["roles"]);
         $user->setRoles($roles);
@@ -70,7 +65,6 @@ class UtilisateurService
         $em->flush();
         var_dump($user->getMail());
         var_dump($data["password"]);
-        //$this->sendConfirmationMail($user->getMail(), $data["password"]);
         return $user;
     }
 
