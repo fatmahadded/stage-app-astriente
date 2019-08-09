@@ -70,7 +70,7 @@ class Utilisateur implements UserInterface
      private $prenom;
 
     /**
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      * @ORM\Column(type="float")
      */
     private $solde;

@@ -72,8 +72,6 @@ class Repos
     }
 
 
-
-
 //    public function getNombreHeures(): ?string
 //    {
 //        return $this->nombreHeures;
