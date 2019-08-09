@@ -96,15 +96,6 @@ class HistoriqueController extends AbstractController
 
     }
 
-//    /**
-//     * @Route("/test",methods={"GET","HEAD"})
-//     */
-//
-//    public function getU(AstreinteRepository $repo)
-//    {
-//        $result= $repo->findusers();
-//        return $this->json($result);
-//    }
 
 
 

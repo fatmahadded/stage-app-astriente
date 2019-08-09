@@ -6,9 +6,7 @@ use App\Entity\Utilisateur;
 use App\Repository\UtilisateurRepository;
 use App\Service\UtilisateurService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UtilisateurController extends AbstractController
@@ -31,8 +29,6 @@ class UtilisateurController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $data = json_decode($request->getContent(), true);
         $result = $service->addUilisateur($data, $entityManager);
-        var_dump($data["mail"]);
-        var_dump($data["password"]);
         $service->sendConfirmationMail($data["mail"], $data["password"]);
         return $this->json($result);
     }
@@ -57,10 +53,6 @@ class UtilisateurController extends AbstractController
         $result=$service->getUserVivier($vivier);
         return $this->json($result);
     }
-
-
-
-
 
     /**
      * @Route("/api/role/{role}", name="role",methods={"GET","HEAD"})

@@ -89,7 +89,6 @@ class AccueilService
             //->where('s.debutSemaine = 2019-01-18')
             ->andWhere('a.vivier= ?3')
             ->setParameters(array(1 => $dateDeb, 2 => $dateFin, 3 => $idVivier));
-        //->setParameters(array( 3 => $idVivier));
         $query = $qb->getQuery();
         $result = $query->getResult();
         return $result;
