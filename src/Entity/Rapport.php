@@ -84,7 +84,7 @@ class Rapport
     }
 
     /**
-     * @return Collection|Intervention[]
+     * @return Collection|Intervention []
      */
     public function getInterventions(): Collection
     {

@@ -27,7 +27,7 @@ class RapportService
 {
     $message = (new \Swift_Message(' Rappel Rapport'))
         ->setFrom('astreinteapp@gmail.com')
-        ->setTo('hajer.harbaoui@esprit.tn')
+        ->setTo('maalej.ghofran.sofien@gmail.com')
         ->setBody('Merci de remplir le rapport ','text/plain');
     $mailer->send($message);
     return new Response('mail sent!! ', Response::HTTP_OK);

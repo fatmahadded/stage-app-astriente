@@ -4,15 +4,18 @@
 namespace App\Controller;
 
 
+use App\Entity\Astreinte;
 use App\Entity\Intervention;
 use App\Entity\Rapport;
 use App\Entity\Retour;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\Annotations\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Route("/api", name="api_intervention")
@@ -21,12 +24,17 @@ class RapportController extends AbstractFOSRestController
 {
 
     /**
-     * @Rest\Post("/rapport")
+     * @Rest\Post("/{idAstrinte}/rapport")
+     * @Entity("astreinte", expr="repository.find(idAstrinte)")
      * @param EntityManagerInterface $entityManager
      * @return Rapport[]
+     * @throws Exception
      */
 
-    public function addRapportToBase(Request $request,EntityManagerInterface $entityManager){
+    public function addRapportToBase(Request $request,
+                                     Astreinte $astreinte,
+                                     EntityManagerInterface $entityManager)
+    {
         $data = $request->request->all()['rapportData'];
         $retour = new Retour();
         $retour->setEntreeAppreciated($data["entreeAppreciated"]);
@@ -40,17 +48,13 @@ class RapportController extends AbstractFOSRestController
         $rapport = new Rapport();
         $rapport->setNote($data['note']);
         $rapport->setRetours($retour);
-        foreach ($data['Interventions'] as $interventionData){
+        foreach ($data['Interventions'] as $interventionData) {
             $Intervention = new Intervention();
             $Intervention->setLabel($interventionData["label"]);
-            try {
-                $date = new \DateTime($interventionData['date']);
-
-                $Intervention->setDate($date);
-            } catch (\Exception $e) {
-            }
-            $Intervention->setHeureDebut(new \DateTime($interventionData["heureDebut"]));
-            $Intervention->setHeureFin(new \DateTime($interventionData["heureFin"]));
+            $date = new DateTime($interventionData['date']);
+            $Intervention->setDate($date);
+            $Intervention->setHeureDebut(new DateTime($interventionData["heureDebut"]));
+            $Intervention->setHeureFin(new DateTime($interventionData["heureFin"]));
             $rapport->addIntervention($Intervention);
             $entityManager->persist($Intervention);
         }
@@ -58,6 +62,7 @@ class RapportController extends AbstractFOSRestController
         $entityManager->persist($retour);
 
         $entityManager->persist($rapport);
+        $astreinte->setRapport($rapport);
 
         $entityManager->flush();
 
